@@ -3,7 +3,7 @@ package termctx
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 
-	"github.com/orglang/go-sdk/adt/qualsym"
+	"github.com/orglang/go-sdk/adt/uniqsym"
 )
 
 var Optional = []validation.Rule{
@@ -13,7 +13,7 @@ var Optional = []validation.Rule{
 
 func (dto BindClaimME) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.BindPH, qualsym.Optional...),
-		validation.Field(&dto.TypeQN, qualsym.Required...),
+		validation.Field(&dto.BindPH, uniqsym.Optional...),
+		validation.Field(&dto.TypeQN, uniqsym.Required...),
 	)
 }

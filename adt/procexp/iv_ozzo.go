@@ -4,8 +4,8 @@ import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 
 	"github.com/orglang/go-sdk/adt/identity"
-	"github.com/orglang/go-sdk/adt/qualsym"
 	"github.com/orglang/go-sdk/adt/termctx"
+	"github.com/orglang/go-sdk/adt/uniqsym"
 )
 
 var expKindRequired = []validation.Rule{
@@ -59,7 +59,7 @@ func (dto RecvSpecME) Validate() error {
 func (dto LabSpecME) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.Label, qualsym.Required...),
+		validation.Field(&dto.Label, uniqsym.Required...),
 	)
 }
 
@@ -76,7 +76,7 @@ func (dto CaseSpecME) Validate() error {
 
 func (dto BranchSpecME) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.Label, qualsym.Required...),
+		validation.Field(&dto.Label, uniqsym.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }

@@ -4,13 +4,13 @@ import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 
 	"github.com/orglang/go-sdk/adt/identity"
-	"github.com/orglang/go-sdk/adt/qualsym"
 	"github.com/orglang/go-sdk/adt/revnum"
+	"github.com/orglang/go-sdk/adt/uniqsym"
 )
 
 func (dto DefSpecME) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.TypeQN, qualsym.Required...),
+		validation.Field(&dto.TypeQN, uniqsym.Required...),
 		validation.Field(&dto.TypeES, validation.Required),
 	)
 }

@@ -4,7 +4,7 @@ import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 
 	"github.com/orglang/go-sdk/adt/identity"
-	"github.com/orglang/go-sdk/adt/qualsym"
+	"github.com/orglang/go-sdk/adt/uniqsym"
 )
 
 func (dto ExpSpecME) Validate() error {
@@ -20,7 +20,7 @@ func (dto ExpSpecME) Validate() error {
 
 func (dto LinkSpecME) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.TypeQN, qualsym.Required...),
+		validation.Field(&dto.TypeQN, uniqsym.Required...),
 	)
 }
 
@@ -43,7 +43,7 @@ func (dto SumSpecME) Validate() error {
 
 func (dto ChoiceSpecME) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.Label, qualsym.Required...),
+		validation.Field(&dto.Label, uniqsym.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }

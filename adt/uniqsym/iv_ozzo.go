@@ -1,4 +1,4 @@
-package qualsym
+package uniqsym
 
 import (
 	"regexp"
@@ -8,7 +8,7 @@ import (
 
 var Optional = []validation.Rule{
 	validation.Length(1, 512),
-	validation.Match(regexp.MustCompile(`^[0-9A-Za-z_-]*$`)),
+	validation.Match(regexp.MustCompile(`^` + regex + `$`)),
 }
 
 var Required = append(Optional, validation.Required)
