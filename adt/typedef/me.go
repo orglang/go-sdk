@@ -2,25 +2,18 @@ package typedef
 
 import (
 	"github.com/orglang/go-sdk/adt/typeexp"
+	"github.com/orglang/go-sdk/adt/uniqref"
 )
 
-type DefSpecME struct {
+type DefRef = uniqref.Msg
+
+type DefSpec struct {
 	TypeQN string            `json:"type_qn"`
 	TypeES typeexp.ExpSpecME `json:"type_es"`
 }
 
-type IdentME struct {
-	DefID string `json:"def_id" param:"id"`
-}
-
-type DefRefME struct {
-	DefID string `json:"def_id" param:"id"`
-	DefRN int64  `json:"def_rn" query:"rn"`
-}
-
-type DefSnapME struct {
-	DefID  string            `json:"def_id" param:"id"`
-	DefRN  int64             `json:"def_rn" query:"rn"`
+type DefSnap struct {
+	DefRef
 	Title  string            `json:"title"`
 	TypeQN string            `json:"type_qn"`
 	TypeES typeexp.ExpSpecME `json:"type_es"`

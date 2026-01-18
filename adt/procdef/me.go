@@ -1,13 +1,13 @@
 package procdef
 
-type semKindME string
+type stepKind string
 
 const (
-	Msg = "msg"
-	Svc = "svc"
+	Msg = stepKind("msg")
+	Svc = stepKind("svc")
 )
 
-type DefRecME struct {
-	ID string    `json:"id"`
-	K  semKindME `json:"kind"`
+type DefRec struct {
+	ID string   `json:"id"`
+	K  stepKind `json:"kind"`
 }

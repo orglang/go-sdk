@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestRegexpMatch(t *testing.T) {
+func TestRegexMatch(t *testing.T) {
 	var sunnyTests = []struct {
 		name string
 		str  string
@@ -26,7 +26,7 @@ func TestRegexpMatch(t *testing.T) {
 	}
 }
 
-func TestRegexpMismatch(t *testing.T) {
+func TestRegexMismatch(t *testing.T) {
 	var rainyTests = []struct {
 		name string
 		str  string

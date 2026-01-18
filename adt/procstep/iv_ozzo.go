@@ -6,7 +6,7 @@ import (
 	"github.com/orglang/go-sdk/adt/identity"
 )
 
-func (dto StepSpecME) Validate() error {
+func (dto StepSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.ExecID, identity.Required...),
 		validation.Field(&dto.ProcID, identity.Required...),

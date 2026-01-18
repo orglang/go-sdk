@@ -28,7 +28,7 @@ type SumSpecME struct {
 }
 
 type ChoiceSpecME struct {
-	Label  string    `json:"label"`
+	LabQN  string    `json:"lab_qn"`
 	ContES ExpSpecME `json:"cont_es"`
 }
 
@@ -60,5 +60,5 @@ const (
 )
 
 func ErrKindUnexpected(got expKindME) error {
-	return fmt.Errorf("kind unexpected: %v", got)
+	return fmt.Errorf("exp kind unexpected: %v", got)
 }

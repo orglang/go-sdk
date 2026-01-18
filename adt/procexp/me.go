@@ -2,112 +2,112 @@ package procexp
 
 import "fmt"
 
-type expKindME string
+type expKind string
 
 const (
-	Close = expKindME("close")
-	Wait  = expKindME("wait")
-	Send  = expKindME("send")
-	Recv  = expKindME("recv")
-	Lab   = expKindME("lab")
-	Case  = expKindME("case")
-	Call  = expKindME("call")
-	Link  = expKindME("link")
-	Spawn = expKindME("spawn")
-	Fwd   = expKindME("fwd")
+	CloseExp = expKind("close")
+	WaitExp  = expKind("wait")
+	SendExp  = expKind("send")
+	RecvExp  = expKind("recv")
+	LabExp   = expKind("lab")
+	CaseExp  = expKind("case")
+	CallExp  = expKind("call")
+	LinkExp  = expKind("link")
+	SpawnExp = expKind("spawn")
+	FwdExp   = expKind("fwd")
 )
 
-type ExpSpecME struct {
-	K       expKindME      `json:"kind"`
-	Close   *CloseSpecME   `json:"close,omitempty"`
-	Wait    *WaitSpecME    `json:"wait,omitempty"`
-	Send    *SendSpecME    `json:"send,omitempty"`
-	Recv    *RecvSpecME    `json:"recv,omitempty"`
-	Lab     *LabSpecME     `json:"lab,omitempty"`
-	Case    *CaseSpecME    `json:"case,omitempty"`
-	Spawn   *SpawnSpecME   `json:"spawn,omitempty"`
-	Fwd     *FwdSpecME     `json:"fwd,omitempty"`
-	Call    *CallSpecME    `json:"call,omitempty"`
-	Accept  *AcceptSpecME  `json:"accept,omitempty"`
-	Detach  *DetachSpecME  `json:"detach,omitempty"`
-	Acquire *AcqureSpecME  `json:"acquire,omitempty"`
-	Release *ReleaseSpecME `json:"release,omitempty"`
+type ExpSpec struct {
+	K       expKind      `json:"kind"`
+	Close   *CloseSpec   `json:"close,omitempty"`
+	Wait    *WaitSpec    `json:"wait,omitempty"`
+	Send    *SendSpec    `json:"send,omitempty"`
+	Recv    *RecvSpec    `json:"recv,omitempty"`
+	Lab     *LabSpec     `json:"lab,omitempty"`
+	Case    *CaseSpec    `json:"case,omitempty"`
+	Spawn   *SpawnSpec   `json:"spawn,omitempty"`
+	Fwd     *FwdSpec     `json:"fwd,omitempty"`
+	Call    *CallSpec    `json:"call,omitempty"`
+	Accept  *AcceptSpec  `json:"accept,omitempty"`
+	Detach  *DetachSpec  `json:"detach,omitempty"`
+	Acquire *AcqureSpec  `json:"acquire,omitempty"`
+	Release *ReleaseSpec `json:"release,omitempty"`
 }
 
-type CloseSpecME struct {
+type CloseSpec struct {
 	CommPH string `json:"comm_ph"`
 }
 
-type WaitSpecME struct {
-	CommPH string    `json:"comm_ph"`
-	ContES ExpSpecME `json:"cont_es"`
+type WaitSpec struct {
+	CommPH string  `json:"comm_ph"`
+	ContES ExpSpec `json:"cont_es"`
 }
 
-type SendSpecME struct {
+type SendSpec struct {
 	CommPH string `json:"comm_ph"`
 	ValPH  string `json:"val_ph"`
 }
 
-type RecvSpecME struct {
-	CommPH string    `json:"comm_ph"`
-	BindPH string    `json:"bind_ph"`
-	ContES ExpSpecME `json:"cont_es"`
+type RecvSpec struct {
+	CommPH string  `json:"comm_ph"`
+	BindPH string  `json:"bind_ph"`
+	ContES ExpSpec `json:"cont_es"`
 }
 
-type LabSpecME struct {
+type LabSpec struct {
 	CommPH string `json:"comm_ph"`
-	Label  string `json:"label"`
+	LabQN  string `json:"lab_qn"`
 }
 
-type CaseSpecME struct {
-	CommPH  string         `json:"comm_ph"`
-	ContBSs []BranchSpecME `json:"cont_bss"`
+type CaseSpec struct {
+	CommPH  string       `json:"comm_ph"`
+	ContBSs []BranchSpec `json:"cont_bss"`
 }
 
-type BranchSpecME struct {
-	Label  string    `json:"label"`
-	ContES ExpSpecME `json:"cont_es"`
+type BranchSpec struct {
+	LabQN  string  `json:"lab_qn"`
+	ContES ExpSpec `json:"cont_es"`
 }
 
-type CallSpecME struct {
-	CommPH string    `json:"comm_ph"`
-	BindPH string    `json:"bind_ph"`
-	ProcQN string    `json:"proc_qn"` // раньше был SigPH
-	ValPHs []string  `json:"val_phs"`
-	ContES ExpSpecME `json:"cont_es"`
+type CallSpec struct {
+	CommPH string   `json:"comm_ph"`
+	BindPH string   `json:"bind_ph"`
+	ProcQN string   `json:"proc_qn"` // раньше был SigPH
+	ValPHs []string `json:"val_phs"`
+	ContES ExpSpec  `json:"cont_es"`
 }
 
-type SpawnSpecME struct {
-	CommPH  string     `json:"comm_ph"`
-	DecID   string     `json:"dec_id"`
-	ProcQN  string     `json:"proc_qn"`
-	BindPHs []string   `json:"bind_phs"`
-	ContES  *ExpSpecME `json:"cont_es"`
+type SpawnSpec struct {
+	CommPH  string   `json:"comm_ph"`
+	DecID   string   `json:"dec_id"`
+	ProcQN  string   `json:"proc_qn"`
+	BindPHs []string `json:"bind_phs"`
+	ContES  ExpSpec  `json:"cont_es"`
 }
 
-type FwdSpecME struct {
-	X string `json:"x"`
-	Y string `json:"y"`
-}
-
-type AcceptSpecME struct {
-	CommPH string    `json:"comm_ph"`
-	ContES ExpSpecME `json:"cont_es"`
-}
-
-type DetachSpecME struct {
+type FwdSpec struct {
 	CommPH string `json:"comm_ph"`
+	ContPH string `json:"cont_ph"`
 }
 
-type AcqureSpecME struct {
-	CommPH string    `json:"comm_ph"`
-	ContES ExpSpecME `json:"cont_es"`
+type AcceptSpec struct {
+	CommPH string  `json:"comm_ph"`
+	ContES ExpSpec `json:"cont_es"`
 }
 
-type ReleaseSpecME struct {
+type DetachSpec struct {
 	CommPH string `json:"comm_ph"`
 }
 
-func ErrUnexpectedExpKind(k expKindME) error {
-	return fmt.Errorf("unexpected term kind: %v", k)
+type AcqureSpec struct {
+	CommPH string  `json:"comm_ph"`
+	ContES ExpSpec `json:"cont_es"`
+}
+
+type ReleaseSpec struct {
+	CommPH string `json:"comm_ph"`
+}
+
+func ErrUnexpectedExpKind(k expKind) error {
+	return fmt.Errorf("unexpected exp kind: %v", k)
 }

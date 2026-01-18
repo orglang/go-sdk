@@ -11,8 +11,8 @@ type RestySDK struct {
 	Client *resty.Client
 }
 
-func (sdk *RestySDK) Run(spec ExecSpecME) error {
-	var res ExecRefME
+func (sdk *RestySDK) Run(spec ExecSpec) error {
+	var res ExecRef
 	_, err := sdk.Client.R().
 		SetPathParam("id", spec.ExecID).
 		SetBody(&spec).
@@ -24,8 +24,8 @@ func (sdk *RestySDK) Run(spec ExecSpecME) error {
 	return nil
 }
 
-func (sdk *RestySDK) Take(spec procstep.StepSpecME) error {
-	var res ExecRefME
+func (sdk *RestySDK) Take(spec procstep.StepSpec) error {
+	var res ExecRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
@@ -38,14 +38,14 @@ func (sdk *RestySDK) Take(spec procstep.StepSpecME) error {
 	return nil
 }
 
-func (sdk *RestySDK) Retrieve(execID string) (ExecSnapME, error) {
-	var res ExecSnapME
+func (sdk *RestySDK) Retrieve(execID string) (ExecSnap, error) {
+	var res ExecSnap
 	_, err := sdk.Client.R().
 		SetPathParam("id", execID).
 		SetResult(&res).
 		Get("/procs/{id}")
 	if err != nil {
-		return ExecSnapME{}, err
+		return ExecSnap{}, err
 	}
 	return res, nil
 }

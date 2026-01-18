@@ -10,45 +10,45 @@ import (
 
 var expKindRequired = []validation.Rule{
 	validation.Required,
-	validation.In(Close, Wait, Send, Recv, Lab, Case, Spawn, Fwd, Call),
+	validation.In(CloseExp, WaitExp, SendExp, RecvExp, LabExp, CaseExp, SpawnExp, FwdExp, CallExp),
 }
 
-func (dto ExpSpecME) Validate() error {
+func (dto ExpSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.K, expKindRequired...),
-		validation.Field(&dto.Close, validation.Required.When(dto.K == Close)),
-		validation.Field(&dto.Wait, validation.Required.When(dto.K == Wait)),
-		validation.Field(&dto.Send, validation.Required.When(dto.K == Send)),
-		validation.Field(&dto.Recv, validation.Required.When(dto.K == Recv)),
-		validation.Field(&dto.Lab, validation.Required.When(dto.K == Lab)),
-		validation.Field(&dto.Case, validation.Required.When(dto.K == Case)),
-		validation.Field(&dto.Spawn, validation.Required.When(dto.K == Spawn)),
-		validation.Field(&dto.Fwd, validation.Required.When(dto.K == Fwd)),
-		validation.Field(&dto.Call, validation.Required.When(dto.K == Call)),
+		validation.Field(&dto.Close, validation.Required.When(dto.K == CloseExp)),
+		validation.Field(&dto.Wait, validation.Required.When(dto.K == WaitExp)),
+		validation.Field(&dto.Send, validation.Required.When(dto.K == SendExp)),
+		validation.Field(&dto.Recv, validation.Required.When(dto.K == RecvExp)),
+		validation.Field(&dto.Lab, validation.Required.When(dto.K == LabExp)),
+		validation.Field(&dto.Case, validation.Required.When(dto.K == CaseExp)),
+		validation.Field(&dto.Spawn, validation.Required.When(dto.K == SpawnExp)),
+		validation.Field(&dto.Fwd, validation.Required.When(dto.K == FwdExp)),
+		validation.Field(&dto.Call, validation.Required.When(dto.K == CallExp)),
 	)
 }
 
-func (dto CloseSpecME) Validate() error {
+func (dto CloseSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
 	)
 }
 
-func (dto WaitSpecME) Validate() error {
+func (dto WaitSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
 
-func (dto SendSpecME) Validate() error {
+func (dto SendSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
 		validation.Field(&dto.ValPH, validation.Required),
 	)
 }
 
-func (dto RecvSpecME) Validate() error {
+func (dto RecvSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
 		validation.Field(&dto.BindPH, validation.Required),
@@ -56,14 +56,14 @@ func (dto RecvSpecME) Validate() error {
 	)
 }
 
-func (dto LabSpecME) Validate() error {
+func (dto LabSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.Label, uniqsym.Required...),
+		validation.Field(&dto.LabQN, uniqsym.Required...),
 	)
 }
 
-func (dto CaseSpecME) Validate() error {
+func (dto CaseSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
 		validation.Field(&dto.ContBSs,
@@ -74,14 +74,14 @@ func (dto CaseSpecME) Validate() error {
 	)
 }
 
-func (dto BranchSpecME) Validate() error {
+func (dto BranchSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.Label, uniqsym.Required...),
+		validation.Field(&dto.LabQN, uniqsym.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
 
-func (dto CallSpecME) Validate() error {
+func (dto CallSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
 		validation.Field(&dto.ProcQN, identity.Required...),
@@ -89,7 +89,7 @@ func (dto CallSpecME) Validate() error {
 	)
 }
 
-func (dto SpawnSpecME) Validate() error {
+func (dto SpawnSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
 		validation.Field(&dto.DecID, identity.Required...),
@@ -97,9 +97,9 @@ func (dto SpawnSpecME) Validate() error {
 	)
 }
 
-func (dto FwdSpecME) Validate() error {
+func (dto FwdSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.X, validation.Required),
-		validation.Field(&dto.Y, validation.Required),
+		validation.Field(&dto.CommPH, validation.Required),
+		validation.Field(&dto.ContPH, validation.Required),
 	)
 }

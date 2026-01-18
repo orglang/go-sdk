@@ -43,7 +43,7 @@ func (dto SumSpecME) Validate() error {
 
 func (dto ChoiceSpecME) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.Label, uniqsym.Required...),
+		validation.Field(&dto.LabQN, uniqsym.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }

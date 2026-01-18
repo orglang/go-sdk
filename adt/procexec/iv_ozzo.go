@@ -6,7 +6,7 @@ import (
 	"github.com/orglang/go-sdk/adt/identity"
 )
 
-func (dto ExecSpecME) Validate() error {
+func (dto ExecSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.ExecID, identity.Required...),
 		validation.Field(&dto.PoolID, identity.Required...),

@@ -11,7 +11,7 @@ var Optional = []validation.Rule{
 	validation.Each(validation.Required),
 }
 
-func (dto BindClaimME) Validate() error {
+func (dto BindClaim) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.BindPH, uniqsym.Optional...),
 		validation.Field(&dto.TypeQN, uniqsym.Required...),

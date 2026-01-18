@@ -40,19 +40,19 @@ func (sdk *RestySDK) RetreiveRefs() ([]ExecRefME, error) {
 	return refs, nil
 }
 
-func (sdk *RestySDK) Spawn(spec procexec.ExecSpecME) (procexec.ExecRefME, error) {
-	var res procexec.ExecRefME
+func (sdk *RestySDK) Spawn(spec procexec.ExecSpec) (procexec.ExecRef, error) {
+	var res procexec.ExecRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
 		SetPathParam("poolID", spec.PoolID).
 		Post("/pools/{poolID}/procs")
 	if err != nil {
-		return procexec.ExecRefME{}, err
+		return procexec.ExecRef{}, err
 	}
 	return res, nil
 }
 
-func (sdk *RestySDK) Poll(spec PollSpecME) (procexec.ExecRefME, error) {
-	return procexec.ExecRefME{}, nil
+func (sdk *RestySDK) Poll(spec PollSpecME) (procexec.ExecRef, error) {
+	return procexec.ExecRef{}, nil
 }
