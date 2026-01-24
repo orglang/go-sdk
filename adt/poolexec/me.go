@@ -1,26 +1,21 @@
 package poolexec
 
-type ExecSpecME struct {
+import "github.com/orglang/go-sdk/adt/uniqref"
+
+type ExecSpec struct {
 	PoolQN  string   `json:"pool_qn"`
 	ProcIDs []string `json:"proc_ids"`
 	SupID   string   `json:"sup_id"`
 }
 
-type IdentME struct {
-	PoolID string `json:"id" param:"id"`
+type ExecRef = uniqref.Msg
+
+type ExecSnap struct {
+	ExecID string    `json:"exec_id"`
+	Title  string    `json:"title"`
+	Subs   []ExecRef `json:"subs"`
 }
 
-type ExecRefME struct {
-	ExecID string `json:"exec_id"`
-	ProcID string `json:"proc_id"`
-}
-
-type ExecSnapME struct {
-	ExecID string      `json:"exec_id"`
-	Title  string      `json:"title"`
-	Subs   []ExecRefME `json:"subs"`
-}
-
-type PollSpecME struct {
+type PollSpec struct {
 	ExecID string `json:"exec_id"`
 }

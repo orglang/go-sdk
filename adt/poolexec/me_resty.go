@@ -11,32 +11,32 @@ type RestySDK struct {
 	Client *resty.Client
 }
 
-func (sdk *RestySDK) Create(spec ExecSpecME) (ExecRefME, error) {
-	var res ExecRefME
+func (sdk *RestySDK) Create(spec ExecSpec) (ExecRef, error) {
+	var res ExecRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
 		Post("/pools")
 	if err != nil {
-		return ExecRefME{}, err
+		return ExecRef{}, err
 	}
 	return res, nil
 }
 
-func (sdk *RestySDK) Retrieve(execID string) (ExecSnapME, error) {
-	var res ExecSnapME
+func (sdk *RestySDK) Retrieve(execID string) (ExecSnap, error) {
+	var res ExecSnap
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetPathParam("id", execID).
 		Get("/pools/{id}")
 	if err != nil {
-		return ExecSnapME{}, err
+		return ExecSnap{}, err
 	}
 	return res, nil
 }
 
-func (sdk *RestySDK) RetreiveRefs() ([]ExecRefME, error) {
-	refs := []ExecRefME{}
+func (sdk *RestySDK) RetreiveRefs() ([]ExecRef, error) {
+	refs := []ExecRef{}
 	return refs, nil
 }
 
@@ -53,6 +53,6 @@ func (sdk *RestySDK) Spawn(spec procexec.ExecSpec) (procexec.ExecRef, error) {
 	return res, nil
 }
 
-func (sdk *RestySDK) Poll(spec PollSpecME) (procexec.ExecRef, error) {
+func (sdk *RestySDK) Poll(spec PollSpec) (procexec.ExecRef, error) {
 	return procexec.ExecRef{}, nil
 }

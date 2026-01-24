@@ -1,13 +1,9 @@
 package procdef
 
-type stepKind string
-
-const (
-	Msg = stepKind("msg")
-	Svc = stepKind("svc")
-)
+import "github.com/orglang/go-sdk/adt/uniqref"
 
 type DefRec struct {
-	ID string   `json:"id"`
-	K  stepKind `json:"kind"`
+	Ref DefRef
 }
+
+type DefRef = uniqref.Msg

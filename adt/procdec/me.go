@@ -1,22 +1,19 @@
 package procdec
 
 import (
-	"github.com/orglang/go-sdk/adt/termctx"
+	"github.com/orglang/go-sdk/adt/procbind"
 	"github.com/orglang/go-sdk/adt/uniqref"
 )
 
-type DecRef = uniqref.Msg
-
 type DecSpec struct {
-	X      termctx.BindClaim   `json:"x"`
+	X      procbind.BindSpec   `json:"x"`
 	ProcQN string              `json:"proc_qn"`
-	Ys     []termctx.BindClaim `json:"ys"`
+	Ys     []procbind.BindSpec `json:"ys"`
 }
 
+type DecRef = uniqref.Msg
+
 type DecSnap struct {
-	X     termctx.BindClaim   `json:"x"`
-	DecID string              `json:"dec_id"`
-	Ys    []termctx.BindClaim `json:"ys"`
-	Title string              `json:"title"`
-	DecRN int64               `json:"dec_rn"`
+	Ref  DecRef  `json:"ref"`
+	Spec DecSpec `json:"spec"`
 }

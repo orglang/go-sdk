@@ -7,7 +7,7 @@ import (
 	"github.com/orglang/go-sdk/adt/uniqsym"
 )
 
-func (dto ExpSpecME) Validate() error {
+func (dto ExpSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.K, kindRequired...),
 		validation.Field(&dto.Link, validation.Required.When(dto.K == LinkExp), validation.Skip.When(dto.K != LinkExp)),
@@ -18,20 +18,20 @@ func (dto ExpSpecME) Validate() error {
 	)
 }
 
-func (dto LinkSpecME) Validate() error {
+func (dto LinkSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.TypeQN, uniqsym.Required...),
 	)
 }
 
-func (dto ProdSpecME) Validate() error {
+func (dto ProdSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.ValES, validation.Required),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
 
-func (dto SumSpecME) Validate() error {
+func (dto SumSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.Choices,
 			validation.Required,
@@ -41,14 +41,14 @@ func (dto SumSpecME) Validate() error {
 	)
 }
 
-func (dto ChoiceSpecME) Validate() error {
+func (dto ChoiceSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.LabQN, uniqsym.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
 
-func (dto ExpRefME) Validate() error {
+func (dto ExpRef) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.ExpID, identity.Required...),
 		validation.Field(&dto.K, kindRequired...),

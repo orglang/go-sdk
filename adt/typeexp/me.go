@@ -2,63 +2,63 @@ package typeexp
 
 import "fmt"
 
-type ExpSpecME struct {
-	K      expKindME   `json:"kind"`
-	Link   *LinkSpecME `json:"link,omitempty"`
-	Tensor *ProdSpecME `json:"tensor,omitempty"`
-	Lolli  *ProdSpecME `json:"lolli,omitempty"`
-	Plus   *SumSpecME  `json:"plus,omitempty"`
-	With   *SumSpecME  `json:"with,omitempty"`
-	Up     *FooSpecME  `json:"up,omitempty"`
-	Down   *FooSpecME  `json:"down,omitempty"`
-	Xact   *XactSpecME `json:"xact,omitempty"`
+type ExpSpec struct {
+	K      expKind   `json:"kind"`
+	Link   *LinkSpec `json:"link,omitempty"`
+	Tensor *ProdSpec `json:"tensor,omitempty"`
+	Lolli  *ProdSpec `json:"lolli,omitempty"`
+	Plus   *SumSpec  `json:"plus,omitempty"`
+	With   *SumSpec  `json:"with,omitempty"`
+	Up     *FooSpec  `json:"up,omitempty"`
+	Down   *FooSpec  `json:"down,omitempty"`
+	Xact   *XactSpec `json:"xact,omitempty"`
 }
 
-type LinkSpecME struct {
+type LinkSpec struct {
 	TypeQN string `json:"type_qn"`
 }
 
-type ProdSpecME struct {
-	ValES  ExpSpecME `json:"val_es"`
-	ContES ExpSpecME `json:"cont_es"`
+type ProdSpec struct {
+	ValES  ExpSpec `json:"val_es"`
+	ContES ExpSpec `json:"cont_es"`
 }
 
-type SumSpecME struct {
-	Choices []ChoiceSpecME `json:"choices"`
+type SumSpec struct {
+	Choices []ChoiceSpec `json:"choices"`
 }
 
-type ChoiceSpecME struct {
-	LabQN  string    `json:"lab_qn"`
-	ContES ExpSpecME `json:"cont_es"`
+type ChoiceSpec struct {
+	LabQN  string  `json:"lab_qn"`
+	ContES ExpSpec `json:"cont_es"`
 }
 
-type FooSpecME struct {
-	ContES ExpSpecME `json:"cont_es"`
+type FooSpec struct {
+	ContES ExpSpec `json:"cont_es"`
 }
 
-type XactSpecME struct {
-	ContESs map[string]ExpSpecME `json:"cont_ess"`
+type XactSpec struct {
+	ContESs map[string]ExpSpec `json:"cont_ess"`
 }
 
-type ExpRefME struct {
-	ExpID string    `json:"exp_id" param:"id"`
-	K     expKindME `json:"kind"`
+type ExpRef struct {
+	ExpID string  `json:"exp_id" param:"id"`
+	K     expKind `json:"kind"`
 }
 
-type expKindME string
+type expKind string
 
 const (
-	OneExp    = expKindME("one")
-	LinkExp   = expKindME("link")
-	TensorExp = expKindME("tensor")
-	LolliExp  = expKindME("lolli")
-	PlusExp   = expKindME("plus")
-	WithExp   = expKindME("with")
-	UpExp     = expKindME("up")
-	DownExp   = expKindME("down")
-	XactExp   = expKindME("xact")
+	OneExp    = expKind("one")
+	LinkExp   = expKind("link")
+	TensorExp = expKind("tensor")
+	LolliExp  = expKind("lolli")
+	PlusExp   = expKind("plus")
+	WithExp   = expKind("with")
+	UpExp     = expKind("up")
+	DownExp   = expKind("down")
+	XactExp   = expKind("xact")
 )
 
-func ErrKindUnexpected(got expKindME) error {
+func ErrKindUnexpected(got expKind) error {
 	return fmt.Errorf("exp kind unexpected: %v", got)
 }

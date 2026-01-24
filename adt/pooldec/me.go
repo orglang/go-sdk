@@ -1,16 +1,17 @@
 package pooldec
 
 import (
-	"github.com/orglang/go-sdk/adt/termctx"
+	"github.com/orglang/go-sdk/adt/procbind"
+	"github.com/orglang/go-sdk/adt/uniqref"
 )
 
-type DecSpecME struct {
+type DecSpec struct {
 	PoolNS               string
 	PoolSN               string
-	InsiderProvisionBC   termctx.BindClaim
-	InsiderReceptionBC   termctx.BindClaim
-	OutsiderProvisionBCs []termctx.BindClaim
-	OutsiderReceptionBCs []termctx.BindClaim
+	InsiderProvisionBC   procbind.BindSpec
+	InsiderReceptionBC   procbind.BindSpec
+	OutsiderProvisionBCs []procbind.BindSpec
+	OutsiderReceptionBCs []procbind.BindSpec
 }
 
-type DecRefME struct{}
+type DecRef = uniqref.Msg

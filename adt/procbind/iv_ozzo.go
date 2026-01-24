@@ -1,4 +1,4 @@
-package termctx
+package procbind
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
@@ -11,9 +11,9 @@ var Optional = []validation.Rule{
 	validation.Each(validation.Required),
 }
 
-func (dto BindClaim) Validate() error {
+func (dto BindSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.BindPH, uniqsym.Optional...),
+		validation.Field(&dto.ChnlPH, uniqsym.Optional...),
 		validation.Field(&dto.TypeQN, uniqsym.Required...),
 	)
 }
