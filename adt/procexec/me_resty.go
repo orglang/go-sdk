@@ -11,27 +11,13 @@ type RestySDK struct {
 	Client *resty.Client
 }
 
-func (sdk *RestySDK) Run(spec ExecSpec) error {
-	var res ExecRef
-	_, err := sdk.Client.R().
-		SetPathParam("id", spec.ExecID).
-		SetBody(&spec).
-		SetResult(&res).
-		Post("/procs/{id}/execs")
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
 func (sdk *RestySDK) Take(spec procstep.StepSpec) error {
 	var res ExecRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
-		SetPathParam("poolID", spec.ExecID).
-		SetPathParam("procID", spec.ProcID).
-		Post("/pools/{poolID}/procs/{procID}/steps")
+		SetPathParam("id", spec.ExecRef.ID).
+		Post("/procs/{id}/steps")
 	if err != nil {
 		return err
 	}

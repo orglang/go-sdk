@@ -6,12 +6,9 @@ import (
 )
 
 type DecSpec struct {
-	PoolNS               string
-	PoolSN               string
-	InsiderProvisionBC   procbind.BindSpec
-	InsiderReceptionBC   procbind.BindSpec
-	OutsiderProvisionBCs []procbind.BindSpec
-	OutsiderReceptionBCs []procbind.BindSpec
+	PoolQN             string
+	InsiderProvisionBS procbind.BindSpec
+	InsiderReceptionBS procbind.BindSpec
 }
 
 type DecRef = uniqref.Msg

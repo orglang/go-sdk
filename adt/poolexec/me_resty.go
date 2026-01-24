@@ -3,6 +3,7 @@ package poolexec
 import (
 	"github.com/go-resty/resty/v2"
 
+	"github.com/orglang/go-sdk/adt/poolstep"
 	"github.com/orglang/go-sdk/adt/procexec"
 )
 
@@ -23,11 +24,11 @@ func (sdk *RestySDK) Create(spec ExecSpec) (ExecRef, error) {
 	return res, nil
 }
 
-func (sdk *RestySDK) Retrieve(execID string) (ExecSnap, error) {
+func (sdk *RestySDK) Retrieve(ref ExecRef) (ExecSnap, error) {
 	var res ExecSnap
 	_, err := sdk.Client.R().
 		SetResult(&res).
-		SetPathParam("id", execID).
+		SetPathParam("id", ref.ID).
 		Get("/pools/{id}")
 	if err != nil {
 		return ExecSnap{}, err
@@ -40,17 +41,17 @@ func (sdk *RestySDK) RetreiveRefs() ([]ExecRef, error) {
 	return refs, nil
 }
 
-func (sdk *RestySDK) Spawn(spec procexec.ExecSpec) (procexec.ExecRef, error) {
+func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
 	var res procexec.ExecRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
-		SetPathParam("poolID", spec.PoolID).
-		Post("/pools/{poolID}/procs")
+		SetPathParam("id", spec.ExecRef.ID).
+		Post("/pools/{id}/steps")
 	if err != nil {
-		return procexec.ExecRef{}, err
+		return err
 	}
-	return res, nil
+	return nil
 }
 
 func (sdk *RestySDK) Poll(spec PollSpec) (procexec.ExecRef, error) {

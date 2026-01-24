@@ -18,20 +18,16 @@ const (
 )
 
 type ExpSpec struct {
-	K       expKind      `json:"kind"`
-	Close   *CloseSpec   `json:"close,omitempty"`
-	Wait    *WaitSpec    `json:"wait,omitempty"`
-	Send    *SendSpec    `json:"send,omitempty"`
-	Recv    *RecvSpec    `json:"recv,omitempty"`
-	Lab     *LabSpec     `json:"lab,omitempty"`
-	Case    *CaseSpec    `json:"case,omitempty"`
-	Spawn   *SpawnSpec   `json:"spawn,omitempty"`
-	Fwd     *FwdSpec     `json:"fwd,omitempty"`
-	Call    *CallSpec    `json:"call,omitempty"`
-	Accept  *AcceptSpec  `json:"accept,omitempty"`
-	Detach  *DetachSpec  `json:"detach,omitempty"`
-	Acquire *AcqureSpec  `json:"acquire,omitempty"`
-	Release *ReleaseSpec `json:"release,omitempty"`
+	K     expKind    `json:"kind"`
+	Close *CloseSpec `json:"close,omitempty"`
+	Wait  *WaitSpec  `json:"wait,omitempty"`
+	Send  *SendSpec  `json:"send,omitempty"`
+	Recv  *RecvSpec  `json:"recv,omitempty"`
+	Lab   *LabSpec   `json:"lab,omitempty"`
+	Case  *CaseSpec  `json:"case,omitempty"`
+	Spawn *SpawnSpec `json:"spawn,omitempty"`
+	Fwd   *FwdSpec   `json:"fwd,omitempty"`
+	Call  *CallSpec  `json:"call,omitempty"`
 }
 
 type CloseSpec struct {
@@ -79,7 +75,6 @@ type CallSpec struct {
 
 type SpawnSpec struct {
 	CommPH  string   `json:"comm_ph"`
-	DecID   string   `json:"dec_id"`
 	ProcQN  string   `json:"proc_qn"`
 	BindPHs []string `json:"bind_phs"`
 	ContES  ExpSpec  `json:"cont_es"`
@@ -88,24 +83,6 @@ type SpawnSpec struct {
 type FwdSpec struct {
 	CommPH string `json:"comm_ph"`
 	ContPH string `json:"cont_ph"`
-}
-
-type AcceptSpec struct {
-	CommPH string  `json:"comm_ph"`
-	ContES ExpSpec `json:"cont_es"`
-}
-
-type DetachSpec struct {
-	CommPH string `json:"comm_ph"`
-}
-
-type AcqureSpec struct {
-	CommPH string  `json:"comm_ph"`
-	ContES ExpSpec `json:"cont_es"`
-}
-
-type ReleaseSpec struct {
-	CommPH string `json:"comm_ph"`
 }
 
 func ErrUnexpectedExpKind(k expKind) error {

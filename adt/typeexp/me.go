@@ -3,15 +3,15 @@ package typeexp
 import "fmt"
 
 type ExpSpec struct {
-	K      expKind   `json:"kind"`
-	Link   *LinkSpec `json:"link,omitempty"`
-	Tensor *ProdSpec `json:"tensor,omitempty"`
-	Lolli  *ProdSpec `json:"lolli,omitempty"`
-	Plus   *SumSpec  `json:"plus,omitempty"`
-	With   *SumSpec  `json:"with,omitempty"`
-	Up     *FooSpec  `json:"up,omitempty"`
-	Down   *FooSpec  `json:"down,omitempty"`
-	Xact   *XactSpec `json:"xact,omitempty"`
+	K      expKind    `json:"kind"`
+	Link   *LinkSpec  `json:"link,omitempty"`
+	Tensor *ProdSpec  `json:"tensor,omitempty"`
+	Lolli  *ProdSpec  `json:"lolli,omitempty"`
+	Plus   *SumSpec   `json:"plus,omitempty"`
+	With   *SumSpec   `json:"with,omitempty"`
+	Up     *ShiftSpec `json:"up,omitempty"`
+	Down   *ShiftSpec `json:"down,omitempty"`
+	Xact   *XactSpec  `json:"xact,omitempty"`
 }
 
 type LinkSpec struct {
@@ -32,7 +32,7 @@ type ChoiceSpec struct {
 	ContES ExpSpec `json:"cont_es"`
 }
 
-type FooSpec struct {
+type ShiftSpec struct {
 	ContES ExpSpec `json:"cont_es"`
 }
 

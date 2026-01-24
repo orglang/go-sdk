@@ -6,9 +6,9 @@ import (
 )
 
 type DecSpec struct {
-	X      procbind.BindSpec   `json:"x"`
-	ProcQN string              `json:"proc_qn"`
-	Ys     []procbind.BindSpec `json:"ys"`
+	ProviderBS procbind.BindSpec   `json:"provider_bs"`
+	ProcQN     string              `json:"proc_qn"`
+	ClientBSs  []procbind.BindSpec `json:"client_bss"`
 }
 
 type DecRef = uniqref.Msg

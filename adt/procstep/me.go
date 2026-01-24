@@ -6,10 +6,11 @@ import (
 )
 
 type StepSpec struct {
-	ExecID string          `json:"exec_id"`
-	ProcID string          `json:"proc_id"`
-	ProcES procexp.ExpSpec `json:"proc_es"`
+	ExecRef ExecRef         `json:"exec_ref"`
+	ProcES  procexp.ExpSpec `json:"proc_es"`
 }
+
+type ExecRef = uniqref.Msg
 
 type stepKind string
 
