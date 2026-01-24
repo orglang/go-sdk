@@ -15,14 +15,14 @@ type ExpSpec struct {
 type expKind string
 
 const (
-	HireExp    = expKind("hire")
-	FireExp    = expKind("fire")
-	ApplyExp   = expKind("apply")
-	QuitExp    = expKind("quit")
-	AcquireExp = expKind("acquire")
-	ReleaseExp = expKind("release")
-	AcceptExp  = expKind("accept")
-	DetachExp  = expKind("detach")
+	Hire    = expKind("hire")
+	Fire    = expKind("fire")
+	Apply   = expKind("apply")
+	Quit    = expKind("quit")
+	Acquire = expKind("acquire")
+	Release = expKind("release")
+	Accept  = expKind("accept")
+	Detach  = expKind("detach")
 )
 
 type HireSpec struct {

@@ -11,7 +11,6 @@ type ExpSpec struct {
 	With   *SumSpec   `json:"with,omitempty"`
 	Up     *ShiftSpec `json:"up,omitempty"`
 	Down   *ShiftSpec `json:"down,omitempty"`
-	Xact   *XactSpec  `json:"xact,omitempty"`
 }
 
 type LinkSpec struct {
@@ -28,16 +27,12 @@ type SumSpec struct {
 }
 
 type ChoiceSpec struct {
-	LabQN  string  `json:"lab_qn"`
+	TermQN string  `json:"term_qn"`
 	ContES ExpSpec `json:"cont_es"`
 }
 
 type ShiftSpec struct {
 	ContES ExpSpec `json:"cont_es"`
-}
-
-type XactSpec struct {
-	ContESs map[string]ExpSpec `json:"cont_ess"`
 }
 
 type ExpRef struct {
@@ -48,15 +43,14 @@ type ExpRef struct {
 type expKind string
 
 const (
-	OneExp    = expKind("one")
-	LinkExp   = expKind("link")
-	TensorExp = expKind("tensor")
-	LolliExp  = expKind("lolli")
-	PlusExp   = expKind("plus")
-	WithExp   = expKind("with")
-	UpExp     = expKind("up")
-	DownExp   = expKind("down")
-	XactExp   = expKind("xact")
+	One    = expKind("one")
+	Link   = expKind("link")
+	Tensor = expKind("tensor")
+	Lolli  = expKind("lolli")
+	Plus   = expKind("plus")
+	With   = expKind("with")
+	Up     = expKind("up")
+	Down   = expKind("down")
 )
 
 func ErrKindUnexpected(got expKind) error {

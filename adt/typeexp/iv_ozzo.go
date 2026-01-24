@@ -10,11 +10,11 @@ import (
 func (dto ExpSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.K, kindRequired...),
-		validation.Field(&dto.Link, validation.Required.When(dto.K == LinkExp), validation.Skip.When(dto.K != LinkExp)),
-		validation.Field(&dto.Tensor, validation.Required.When(dto.K == TensorExp), validation.Skip.When(dto.K != TensorExp)),
-		validation.Field(&dto.Lolli, validation.Required.When(dto.K == LolliExp), validation.Skip.When(dto.K != LolliExp)),
-		validation.Field(&dto.Plus, validation.Required.When(dto.K == PlusExp), validation.Skip.When(dto.K != PlusExp)),
-		validation.Field(&dto.With, validation.Required.When(dto.K == WithExp), validation.Skip.When(dto.K != WithExp)),
+		validation.Field(&dto.Link, validation.Required.When(dto.K == Link), validation.Skip.When(dto.K != Link)),
+		validation.Field(&dto.Tensor, validation.Required.When(dto.K == Tensor), validation.Skip.When(dto.K != Tensor)),
+		validation.Field(&dto.Lolli, validation.Required.When(dto.K == Lolli), validation.Skip.When(dto.K != Lolli)),
+		validation.Field(&dto.Plus, validation.Required.When(dto.K == Plus), validation.Skip.When(dto.K != Plus)),
+		validation.Field(&dto.With, validation.Required.When(dto.K == With), validation.Skip.When(dto.K != With)),
 	)
 }
 
@@ -43,7 +43,7 @@ func (dto SumSpec) Validate() error {
 
 func (dto ChoiceSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.LabQN, uniqsym.Required...),
+		validation.Field(&dto.TermQN, uniqsym.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
@@ -57,5 +57,5 @@ func (dto ExpRef) Validate() error {
 
 var kindRequired = []validation.Rule{
 	validation.Required,
-	validation.In(OneExp, LinkExp, TensorExp, LolliExp, PlusExp, WithExp),
+	validation.In(One, Link, Tensor, Lolli, Plus, With),
 }
