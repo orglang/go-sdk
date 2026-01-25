@@ -1,9 +1,8 @@
-package typeexp
+package xactexp
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 
-	"github.com/orglang/go-sdk/adt/identity"
 	"github.com/orglang/go-sdk/adt/uniqsym"
 )
 
@@ -20,18 +19,18 @@ func (dto ExpSpec) Validate() error {
 
 func (dto LinkSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.TypeQN, uniqsym.Required...),
+		validation.Field(&dto.XactQN, uniqsym.Required...),
 	)
 }
 
-func (dto ProdSpec) Validate() error {
+func (dto ResSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.ValES, validation.Required),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
 
-func (dto SumSpec) Validate() error {
+func (dto LaborSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.Choices,
 			validation.Required,
@@ -43,15 +42,8 @@ func (dto SumSpec) Validate() error {
 
 func (dto ChoiceSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.LabQN, uniqsym.Required...),
+		validation.Field(&dto.ProcQN, uniqsym.Required...),
 		validation.Field(&dto.ContES, validation.Required),
-	)
-}
-
-func (dto ExpRef) Validate() error {
-	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.ExpID, identity.Required...),
-		validation.Field(&dto.K, kindRequired...),
 	)
 }
 

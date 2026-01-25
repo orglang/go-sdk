@@ -6,8 +6,8 @@ import (
 )
 
 type DecSpec struct {
-	ProviderBS procbind.BindSpec   `json:"provider_bs"`
 	ProcQN     string              `json:"proc_qn"`
+	ProviderBS procbind.BindSpec   `json:"provider_bs"`
 	ClientBSs  []procbind.BindSpec `json:"client_bss"`
 }
 

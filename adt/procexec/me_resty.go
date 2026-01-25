@@ -24,10 +24,10 @@ func (sdk *RestySDK) Take(spec procstep.StepSpec) error {
 	return nil
 }
 
-func (sdk *RestySDK) Retrieve(execID string) (ExecSnap, error) {
+func (sdk *RestySDK) Retrieve(execRef ExecRef) (ExecSnap, error) {
 	var res ExecSnap
 	_, err := sdk.Client.R().
-		SetPathParam("id", execID).
+		SetPathParam("id", execRef.ID).
 		SetResult(&res).
 		Get("/procs/{id}")
 	if err != nil {

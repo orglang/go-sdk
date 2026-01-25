@@ -27,7 +27,7 @@ type SumSpec struct {
 }
 
 type ChoiceSpec struct {
-	TermQN string  `json:"term_qn"`
+	LabQN  string  `json:"lab_qn"`
 	ContES ExpSpec `json:"cont_es"`
 }
 

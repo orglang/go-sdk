@@ -4,26 +4,26 @@ import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 
 	"github.com/orglang/go-sdk/adt/procbind"
+	"github.com/orglang/go-sdk/adt/symbol"
 	"github.com/orglang/go-sdk/adt/uniqsym"
 )
 
 var expKindRequired = []validation.Rule{
 	validation.Required,
-	validation.In(CloseExp, WaitExp, SendExp, RecvExp, LabExp, CaseExp, SpawnExp, FwdExp, CallExp),
+	validation.In(Close, Wait, Send, Recv, Lab, Case, Fwd, Call),
 }
 
 func (dto ExpSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.K, expKindRequired...),
-		validation.Field(&dto.Close, validation.Required.When(dto.K == CloseExp)),
-		validation.Field(&dto.Wait, validation.Required.When(dto.K == WaitExp)),
-		validation.Field(&dto.Send, validation.Required.When(dto.K == SendExp)),
-		validation.Field(&dto.Recv, validation.Required.When(dto.K == RecvExp)),
-		validation.Field(&dto.Lab, validation.Required.When(dto.K == LabExp)),
-		validation.Field(&dto.Case, validation.Required.When(dto.K == CaseExp)),
-		validation.Field(&dto.Spawn, validation.Required.When(dto.K == SpawnExp)),
-		validation.Field(&dto.Fwd, validation.Required.When(dto.K == FwdExp)),
-		validation.Field(&dto.Call, validation.Required.When(dto.K == CallExp)),
+		validation.Field(&dto.Close, validation.Required.When(dto.K == Close)),
+		validation.Field(&dto.Wait, validation.Required.When(dto.K == Wait)),
+		validation.Field(&dto.Send, validation.Required.When(dto.K == Send)),
+		validation.Field(&dto.Recv, validation.Required.When(dto.K == Recv)),
+		validation.Field(&dto.Lab, validation.Required.When(dto.K == Lab)),
+		validation.Field(&dto.Case, validation.Required.When(dto.K == Case)),
+		validation.Field(&dto.Fwd, validation.Required.When(dto.K == Fwd)),
+		validation.Field(&dto.Call, validation.Required.When(dto.K == Call)),
 	)
 }
 
@@ -58,7 +58,7 @@ func (dto RecvSpec) Validate() error {
 func (dto LabSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.LabQN, uniqsym.Required...),
+		validation.Field(&dto.InfoQN, uniqsym.Required...),
 	)
 }
 
@@ -82,17 +82,9 @@ func (dto BranchSpec) Validate() error {
 
 func (dto CallSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
+		validation.Field(&dto.BindPH, symbol.Required...),
 		validation.Field(&dto.ProcQN, uniqsym.Required...),
 		validation.Field(&dto.ValPHs, procbind.Optional...),
-	)
-}
-
-func (dto SpawnSpec) Validate() error {
-	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.ProcQN, uniqsym.Required...),
-		validation.Field(&dto.BindPHs, procbind.Optional...),
 	)
 }
 

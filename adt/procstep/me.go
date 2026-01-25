@@ -6,7 +6,7 @@ import (
 )
 
 type StepSpec struct {
-	ExecRef ExecRef         `json:"exec_ref"`
+	ExecRef ExecRef
 	ProcES  procexp.ExpSpec `json:"proc_es"`
 }
 

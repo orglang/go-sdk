@@ -5,16 +5,15 @@ import "fmt"
 type expKind string
 
 const (
-	CloseExp = expKind("close")
-	WaitExp  = expKind("wait")
-	SendExp  = expKind("send")
-	RecvExp  = expKind("recv")
-	LabExp   = expKind("lab")
-	CaseExp  = expKind("case")
-	CallExp  = expKind("call")
-	LinkExp  = expKind("link")
-	SpawnExp = expKind("spawn")
-	FwdExp   = expKind("fwd")
+	Close = expKind("close")
+	Wait  = expKind("wait")
+	Send  = expKind("send")
+	Recv  = expKind("recv")
+	Lab   = expKind("lab")
+	Case  = expKind("case")
+	Call  = expKind("call")
+	Link  = expKind("link")
+	Fwd   = expKind("fwd")
 )
 
 type ExpSpec struct {
@@ -25,9 +24,8 @@ type ExpSpec struct {
 	Recv  *RecvSpec  `json:"recv,omitempty"`
 	Lab   *LabSpec   `json:"lab,omitempty"`
 	Case  *CaseSpec  `json:"case,omitempty"`
-	Spawn *SpawnSpec `json:"spawn,omitempty"`
-	Fwd   *FwdSpec   `json:"fwd,omitempty"`
 	Call  *CallSpec  `json:"call,omitempty"`
+	Fwd   *FwdSpec   `json:"fwd,omitempty"`
 }
 
 type CloseSpec struct {
@@ -52,7 +50,7 @@ type RecvSpec struct {
 
 type LabSpec struct {
 	CommPH string `json:"comm_ph"`
-	LabQN  string `json:"lab_qn"`
+	InfoQN string `json:"info_qn"`
 }
 
 type CaseSpec struct {
@@ -66,18 +64,10 @@ type BranchSpec struct {
 }
 
 type CallSpec struct {
-	CommPH string   `json:"comm_ph"`
 	BindPH string   `json:"bind_ph"`
 	ProcQN string   `json:"proc_qn"` // раньше был SigPH
 	ValPHs []string `json:"val_phs"`
 	ContES ExpSpec  `json:"cont_es"`
-}
-
-type SpawnSpec struct {
-	CommPH  string   `json:"comm_ph"`
-	ProcQN  string   `json:"proc_qn"`
-	BindPHs []string `json:"bind_phs"`
-	ContES  ExpSpec  `json:"cont_es"`
 }
 
 type FwdSpec struct {

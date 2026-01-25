@@ -10,6 +10,7 @@ type ExpSpec struct {
 	Release *ReleaseSpec `json:"release"`
 	Accept  *AcceptSpec  `json:"accept"`
 	Detach  *DetachSpec  `json:"detach"`
+	Spawn   *SpawnSpec   `json:"spawn"`
 }
 
 type expKind string
@@ -23,14 +24,13 @@ const (
 	Release = expKind("release")
 	Accept  = expKind("accept")
 	Detach  = expKind("detach")
+	Spawn   = expKind("spawn")
 )
 
 type HireSpec struct {
-	CommPH string   `json:"comm_ph"`
-	BindPH string   `json:"bind_ph"`
-	ProcQN string   `json:"proc_qn"`
-	ValPHs []string `json:"val_phs"`
-	ContES ExpSpec  `json:"cont_es"`
+	CommPH string  `json:"comm_ph"`
+	ProcQN string  `json:"proc_qn"`
+	ContES ExpSpec `json:"cont_es"`
 }
 
 type FireSpec struct {
@@ -63,4 +63,10 @@ type AcceptSpec struct {
 
 type DetachSpec struct {
 	CommPH string `json:"comm_ph"`
+}
+
+type SpawnSpec struct {
+	BindPH string   `json:"bind_ph"`
+	ProcQN string   `json:"proc_qn"`
+	ValPHs []string `json:"val_phs"`
 }

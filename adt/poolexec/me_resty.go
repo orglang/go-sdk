@@ -42,9 +42,7 @@ func (sdk *RestySDK) RetreiveRefs() ([]ExecRef, error) {
 }
 
 func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
-	var res procexec.ExecRef
 	_, err := sdk.Client.R().
-		SetResult(&res).
 		SetBody(&spec).
 		SetPathParam("id", spec.ExecRef.ID).
 		Post("/pools/{id}/steps")
@@ -52,6 +50,19 @@ func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
 		return err
 	}
 	return nil
+}
+
+func (sdk *RestySDK) Spawn(spec poolstep.StepSpec) (procexec.ExecRef, error) {
+	var res procexec.ExecRef
+	_, err := sdk.Client.R().
+		SetResult(&res).
+		SetBody(&spec).
+		SetPathParam("id", spec.ExecRef.ID).
+		Post("/pools/{id}/spawns")
+	if err != nil {
+		return procexec.ExecRef{}, err
+	}
+	return res, nil
 }
 
 func (sdk *RestySDK) Poll(spec PollSpec) (procexec.ExecRef, error) {
