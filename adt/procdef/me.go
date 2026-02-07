@@ -1,6 +1,8 @@
 package procdef
 
-import "github.com/orglang/go-sdk/adt/uniqref"
+import (
+	"github.com/orglang/go-sdk/adt/uniqref"
+)
 
 type DefRec struct {
 	Ref DefRef

@@ -20,7 +20,7 @@ func TestRegexMatch(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			isMatched := regex.MatchString(test.str)
 			if !isMatched {
-				t.Errorf("unexpected mismatch")
+				t.Error("unexpected mismatch")
 			}
 		})
 	}
@@ -43,7 +43,7 @@ func TestRegexMismatch(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			isMatched := regex.MatchString(test.str)
 			if isMatched {
-				t.Errorf("unexpected match")
+				t.Error("unexpected match")
 			}
 		})
 	}

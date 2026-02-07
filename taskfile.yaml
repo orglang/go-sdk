@@ -3,12 +3,36 @@ version: '3'
 tasks:
   sources:
     aliases: [src]
+    preconditions:
+      - sh: '[ "$(gofmt -s -l . | wc -l)" -eq 0 ]'
+    deps:
+      - task: linter:vet
+      - task: linter:critic
+      - task: linter:revive
+      - task: linter:errcheck
+      - task: linter:consistent
+      - task: linter:staticcheck
     cmds:
-      - cmd: go run github.com/jmattheis/goverter/cmd/goverter gen -global 'skipCopySameType yes' ./...
-      - cmd: go fmt ./...
-      - cmd: go build ./...
+      - cmd: echo success
+        silent: true
 
   tests:
-    aliases: [test]
     cmds:
       - cmd: go test ./...
+
+  linter:*:
+    vars:
+      TOOL: '{{index .MATCH 0}}'
+    cmds:
+      - cmd: go vet ./...
+        if: '{{eq .TOOL "vet"}}'
+      - cmd: go run github.com/mgechev/revive ./...
+        if: '{{eq .TOOL "revive"}}'
+      - cmd: go run github.com/go-critic/go-critic/cmd/go-critic check ./...
+        if: '{{eq .TOOL "critic"}}'
+      - cmd: go run github.com/quasilyte/go-consistent ./...
+        if: '{{eq .TOOL "consistent"}}'
+      - cmd: go run honnef.co/go/tools/cmd/staticcheck ./...
+        if: '{{eq .TOOL "staticcheck"}}'
+      - cmd: go run github.com/kisielk/errcheck ./...
+        if: '{{eq .TOOL "errcheck"}}'

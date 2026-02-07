@@ -1,6 +1,8 @@
 package procexp
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type expKind string
 

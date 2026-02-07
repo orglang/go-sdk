@@ -1,6 +1,8 @@
 package poolexec
 
-import "github.com/orglang/go-sdk/adt/uniqref"
+import (
+	"github.com/orglang/go-sdk/adt/uniqref"
+)
 
 type ExecSpec struct {
 	PoolQN string `json:"pool_qn"`

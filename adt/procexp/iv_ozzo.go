@@ -62,12 +62,17 @@ func (dto LabSpec) Validate() error {
 	)
 }
 
+const (
+	MinContNr = 1
+	MaxContNr = 10
+)
+
 func (dto CaseSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommPH, validation.Required),
 		validation.Field(&dto.ContBSs,
 			validation.Required,
-			validation.Length(1, 10),
+			validation.Length(MinContNr, MaxContNr),
 			validation.Each(validation.Required),
 		),
 	)

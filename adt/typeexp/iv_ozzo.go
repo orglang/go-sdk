@@ -31,11 +31,16 @@ func (dto ProdSpec) Validate() error {
 	)
 }
 
+const (
+	MinChoiceNr = 1
+	MaxChoiceNr = 10
+)
+
 func (dto SumSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.Choices,
 			validation.Required,
-			validation.Length(1, 10),
+			validation.Length(MinChoiceNr, MaxChoiceNr),
 			validation.Each(validation.Required),
 		),
 	)

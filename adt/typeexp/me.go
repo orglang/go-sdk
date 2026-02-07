@@ -1,6 +1,8 @@
 package typeexp
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type ExpSpec struct {
 	K      expKind    `json:"kind"`
