@@ -13,6 +13,6 @@ type DefSpec struct {
 }
 
 type DefSnap struct {
-	Ref  DefRef  `json:"ref"`
-	Spec DefSpec `json:"spec"`
+	DefRef  DefRef  `json:"ref"`
+	DefSpec DefSpec `json:"spec"`
 }

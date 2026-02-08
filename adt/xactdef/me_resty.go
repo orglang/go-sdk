@@ -20,7 +20,7 @@ func (sdk *RestySDK) Create(spec DefSpec) (DefSnap, error) {
 	resp, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
-		Post("/types")
+		Post("/xacts")
 	if err != nil {
 		return DefSnap{}, err
 	}

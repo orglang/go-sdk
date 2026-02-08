@@ -32,6 +32,11 @@ type ResSpec struct {
 	ContES ExpSpec `json:"cont_es"`
 }
 
+type ExpRef struct {
+	ExpID string  `json:"exp_id" param:"id"`
+	K     expKind `json:"kind"`
+}
+
 type expKind string
 
 const (
