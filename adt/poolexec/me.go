@@ -6,7 +6,6 @@ import (
 
 type ExecSpec struct {
 	PoolQN string `json:"pool_qn"`
-	SupID  string `json:"sup_id"`
 }
 
 type ExecRef = uniqref.Msg

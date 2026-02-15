@@ -9,7 +9,6 @@ type BindSpec struct {
 type bindMode string
 
 const (
-	Self     = bindMode("self")
-	Required = bindMode("required")
-	Optional = bindMode("optional")
+	Internal bindMode = "internal"
+	External bindMode = "external"
 )

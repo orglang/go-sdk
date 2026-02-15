@@ -8,7 +8,7 @@ import (
 type DecSpec struct {
 	PoolQN     string
 	ProviderBS poolbind.BindSpec
-	ClientBS   poolbind.BindSpec
+	ClientBSes []poolbind.BindSpec
 }
 
 type DecRef = uniqref.Msg
