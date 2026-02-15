@@ -33,19 +33,19 @@ type ResSpec struct {
 }
 
 type ExpRef struct {
-	ExpID string  `json:"exp_id" param:"id"`
+	ExpVK int64   `json:"exp_vk" param:"vk"`
 	K     expKind `json:"kind"`
 }
 
 type expKind string
 
 const (
-	One    = expKind("one")
-	Link   = expKind("link")
-	Plus   = expKind("plus")
-	With   = expKind("with")
-	Tensor = expKind("tensor")
-	Lolli  = expKind("lolli")
+	One    expKind = "one"
+	Link   expKind = "link"
+	Plus   expKind = "plus"
+	With   expKind = "with"
+	Tensor expKind = "tensor"
+	Lolli  expKind = "lolli"
 )
 
 func ErrKindUnexpected(got expKind) error {

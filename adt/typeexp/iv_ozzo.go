@@ -26,8 +26,8 @@ func (dto LinkSpec) Validate() error {
 
 func (dto ProdSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.ValES, validation.Required),
-		validation.Field(&dto.ContES, validation.Required),
+		validation.Field(&dto.Val, validation.Required),
+		validation.Field(&dto.Cont, validation.Required),
 	)
 }
 
@@ -49,13 +49,13 @@ func (dto SumSpec) Validate() error {
 func (dto ChoiceSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.LabQN, uniqsym.Required...),
-		validation.Field(&dto.ContES, validation.Required),
+		validation.Field(&dto.Cont, validation.Required),
 	)
 }
 
 func (dto ExpRef) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.ExpID, identity.Required...),
+		validation.Field(&dto.ExpVK, identity.Required...),
 		validation.Field(&dto.K, kindRequired...),
 	)
 }

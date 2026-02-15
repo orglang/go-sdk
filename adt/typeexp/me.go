@@ -20,8 +20,8 @@ type LinkSpec struct {
 }
 
 type ProdSpec struct {
-	ValES  ExpSpec `json:"val_es"`
-	ContES ExpSpec `json:"cont_es"`
+	Val  ExpSpec `json:"val_es"`
+	Cont ExpSpec `json:"cont_es"`
 }
 
 type SumSpec struct {
@@ -29,16 +29,16 @@ type SumSpec struct {
 }
 
 type ChoiceSpec struct {
-	LabQN  string  `json:"lab_qn"`
-	ContES ExpSpec `json:"cont_es"`
+	LabQN string  `json:"lab_qn"`
+	Cont  ExpSpec `json:"cont_es"`
 }
 
 type ShiftSpec struct {
-	ContES ExpSpec `json:"cont_es"`
+	Cont ExpSpec `json:"cont_es"`
 }
 
 type ExpRef struct {
-	ExpID string  `json:"exp_id" param:"id"`
+	ExpVK int64   `json:"exp_vk" param:"vk"`
 	K     expKind `json:"kind"`
 }
 
