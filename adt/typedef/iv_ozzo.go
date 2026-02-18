@@ -15,7 +15,7 @@ func (dto DefSpec) Validate() error {
 
 func (dto DefSnap) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.DefRef, validation.Required),
+		validation.Field(&dto.DescRef, validation.Required),
 		validation.Field(&dto.DefSpec, validation.Required),
 	)
 }

@@ -1,11 +1,9 @@
 package xactdef
 
 import (
-	"github.com/orglang/go-sdk/adt/uniqref"
+	"github.com/orglang/go-sdk/adt/descexec"
 	"github.com/orglang/go-sdk/adt/xactexp"
 )
-
-type DefRef = uniqref.Msg
 
 type DefSpec struct {
 	XactQN string          `json:"xact_qn"`
@@ -13,6 +11,6 @@ type DefSpec struct {
 }
 
 type DefSnap struct {
-	DefRef  DefRef  `json:"ref"`
-	DefSpec DefSpec `json:"spec"`
+	DescRef descexec.ExecRef `json:"ref"`
+	DefSpec DefSpec          `json:"spec"`
 }

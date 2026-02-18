@@ -6,9 +6,9 @@ import (
 )
 
 type DecSpec struct {
-	PoolQN     string
-	ProviderBS poolbind.BindSpec
-	ClientBSes []poolbind.BindSpec
+	PoolQN     string              `json:"pool_qn"`
+	ProviderBS poolbind.BindSpec   `json:"provider_bs"`
+	ClientBSes []poolbind.BindSpec `json:"client_bses"`
 }
 
-type DecRef = uniqref.Msg
+type PoolRef = uniqref.Msg

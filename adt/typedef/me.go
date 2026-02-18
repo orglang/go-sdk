@@ -1,11 +1,9 @@
 package typedef
 
 import (
+	"github.com/orglang/go-sdk/adt/descexec"
 	"github.com/orglang/go-sdk/adt/typeexp"
-	"github.com/orglang/go-sdk/adt/uniqref"
 )
-
-type DefRef = uniqref.Msg
 
 type DefSpec struct {
 	TypeQN string          `json:"type_qn"`
@@ -13,6 +11,6 @@ type DefSpec struct {
 }
 
 type DefSnap struct {
-	DefRef  DefRef  `json:"ref"`
-	DefSpec DefSpec `json:"spec"`
+	DescRef descexec.ExecRef `json:"ref"`
+	DefSpec DefSpec          `json:"spec"`
 }

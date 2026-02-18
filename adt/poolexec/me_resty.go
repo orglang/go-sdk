@@ -17,7 +17,7 @@ func (sdk *RestySDK) Create(spec ExecSpec) (ExecRef, error) {
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
-		Post("/pools")
+		Post("/pools/execs")
 	if err != nil {
 		return ExecRef{}, err
 	}
@@ -45,7 +45,7 @@ func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
 	_, err := sdk.Client.R().
 		SetBody(&spec).
 		SetPathParam("id", spec.ExecRef.ID).
-		Post("/pools/{id}/steps")
+		Post("/pools/execs/{id}/steps")
 	if err != nil {
 		return err
 	}

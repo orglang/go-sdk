@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/go-resty/resty/v2"
+	"github.com/orglang/go-sdk/adt/descexec"
 )
 
 // Client-side secondary adapter
@@ -11,8 +12,8 @@ type RestySDK struct {
 	Client *resty.Client
 }
 
-func (sdk *RestySDK) Incept(xactQN string) (DefRef, error) {
-	return DefRef{}, nil
+func (sdk *RestySDK) Incept(xactQN string) (descexec.ExecRef, error) {
+	return descexec.ExecRef{}, nil
 }
 
 func (sdk *RestySDK) Create(spec DefSpec) (DefSnap, error) {
@@ -20,7 +21,7 @@ func (sdk *RestySDK) Create(spec DefSpec) (DefSnap, error) {
 	resp, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
-		Post("/xacts")
+		Post("/xacts/defs")
 	if err != nil {
 		return DefSnap{}, err
 	}
@@ -38,6 +39,6 @@ func (sdk *RestySDK) Retrieve(defID string) (DefSnap, error) {
 	return DefSnap{}, nil
 }
 
-func (sdk *RestySDK) RetreiveRefs() ([]DefRef, error) {
-	return []DefRef{}, nil
+func (sdk *RestySDK) RetreiveRefs() ([]descexec.ExecRef, error) {
+	return []descexec.ExecRef{}, nil
 }

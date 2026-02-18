@@ -9,14 +9,14 @@ type RestySDK struct {
 	Client *resty.Client
 }
 
-func (sdk *RestySDK) Create(spec DecSpec) (DecRef, error) {
-	var res DecRef
+func (sdk *RestySDK) Create(spec DecSpec) (PoolRef, error) {
+	var res PoolRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
 		Post("/pools/decs")
 	if err != nil {
-		return DecRef{}, err
+		return PoolRef{}, err
 	}
 	return res, nil
 }
