@@ -1,11 +1,9 @@
 package procdef
 
 import (
-	"github.com/orglang/go-sdk/adt/uniqref"
+	"github.com/orglang/go-sdk/adt/descsem"
 )
 
 type DefRec struct {
-	Ref DefRef
+	Ref descsem.SemRef
 }
-
-type DefRef = uniqref.Msg
