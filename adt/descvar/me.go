@@ -1,9 +1,9 @@
-package poolbind
+package descvar
 
-type BindSpec struct {
+type VarSpec struct {
 	ChnlPH string `json:"chnl_ph"`
 	// ChnlBM bindMode `json:"chnl_bm"`
-	XactQN string `json:"xact_qn"`
+	DescQN string `json:"xact_qn"`
 }
 
 type bindMode string

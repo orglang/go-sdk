@@ -1,11 +1,9 @@
 package procexec
 
 import (
-	"github.com/orglang/go-sdk/adt/uniqref"
+	"github.com/orglang/go-sdk/adt/implsem"
 )
 
-type ExecRef = uniqref.Msg
-
 type ExecSnap struct {
-	ExecRef ExecRef
+	ExecRef implsem.SemRef
 }

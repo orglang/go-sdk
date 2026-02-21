@@ -3,8 +3,8 @@ package poolexec
 import (
 	"github.com/go-resty/resty/v2"
 
+	"github.com/orglang/go-sdk/adt/implsem"
 	"github.com/orglang/go-sdk/adt/poolstep"
-	"github.com/orglang/go-sdk/adt/procexec"
 )
 
 // Client-side secondary adapter
@@ -12,23 +12,23 @@ type RestySDK struct {
 	Client *resty.Client
 }
 
-func (sdk *RestySDK) Create(spec ExecSpec) (ExecRef, error) {
-	var res ExecRef
+func (sdk *RestySDK) Create(spec ExecSpec) (implsem.SemRef, error) {
+	var res implsem.SemRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
 		Post("/pools/execs")
 	if err != nil {
-		return ExecRef{}, err
+		return implsem.SemRef{}, err
 	}
 	return res, nil
 }
 
-func (sdk *RestySDK) Retrieve(ref ExecRef) (ExecSnap, error) {
+func (sdk *RestySDK) Retrieve(ref implsem.SemRef) (ExecSnap, error) {
 	var res ExecSnap
 	_, err := sdk.Client.R().
 		SetResult(&res).
-		SetPathParam("id", ref.ID).
+		SetPathParam("id", ref.ImplID).
 		Get("/pools/{id}")
 	if err != nil {
 		return ExecSnap{}, err
@@ -36,15 +36,15 @@ func (sdk *RestySDK) Retrieve(ref ExecRef) (ExecSnap, error) {
 	return res, nil
 }
 
-func (sdk *RestySDK) RetreiveRefs() ([]ExecRef, error) {
-	refs := []ExecRef{}
+func (sdk *RestySDK) RetreiveRefs() ([]implsem.SemRef, error) {
+	refs := []implsem.SemRef{}
 	return refs, nil
 }
 
 func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
 	_, err := sdk.Client.R().
 		SetBody(&spec).
-		SetPathParam("id", spec.ExecRef.ID).
+		SetPathParam("id", spec.ExecRef.ImplID).
 		Post("/pools/execs/{id}/steps")
 	if err != nil {
 		return err
@@ -52,19 +52,19 @@ func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
 	return nil
 }
 
-func (sdk *RestySDK) Spawn(spec poolstep.StepSpec) (procexec.ExecRef, error) {
-	var res procexec.ExecRef
+func (sdk *RestySDK) Spawn(spec poolstep.StepSpec) (implsem.SemRef, error) {
+	var res implsem.SemRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
-		SetPathParam("id", spec.ExecRef.ID).
+		SetPathParam("id", spec.ExecRef.ImplID).
 		Post("/pools/{id}/spawns")
 	if err != nil {
-		return procexec.ExecRef{}, err
+		return implsem.SemRef{}, err
 	}
 	return res, nil
 }
 
-func (sdk *RestySDK) Poll(spec PollSpec) (procexec.ExecRef, error) {
-	return procexec.ExecRef{}, nil
+func (sdk *RestySDK) Poll(spec PollSpec) (implsem.SemRef, error) {
+	return implsem.SemRef{}, nil
 }

@@ -1,12 +1,13 @@
 package procstep
 
 import (
+	"github.com/orglang/go-sdk/adt/implsem"
 	"github.com/orglang/go-sdk/adt/procexp"
 	"github.com/orglang/go-sdk/adt/uniqref"
 )
 
 type StepSpec struct {
-	ExecRef ExecRef
+	ExecRef implsem.SemRef
 	ProcES  procexp.ExpSpec `json:"proc_es"`
 }
 

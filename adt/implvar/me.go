@@ -1,6 +1,6 @@
-package procbind
+package implvar
 
-type BindSpec struct {
+type VarSpec struct {
 	ChnlPH string `json:"chnl_ph"`
 	TypeQN string `json:"type_qn"`
 }

@@ -1,7 +1,7 @@
 package xactdef
 
 import (
-	"github.com/orglang/go-sdk/adt/descexec"
+	"github.com/orglang/go-sdk/adt/descsem"
 	"github.com/orglang/go-sdk/adt/xactexp"
 )
 
@@ -11,6 +11,6 @@ type DefSpec struct {
 }
 
 type DefSnap struct {
-	DescRef descexec.ExecRef `json:"ref"`
-	DefSpec DefSpec          `json:"spec"`
+	DescRef descsem.SemRef `json:"ref"`
+	DefSpec DefSpec        `json:"spec"`
 }

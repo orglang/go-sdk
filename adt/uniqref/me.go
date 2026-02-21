@@ -1,6 +1,6 @@
 package uniqref
 
 type Msg struct {
-	ID string `json:"id" param:"id"`
-	RN int64  `json:"rn" query:"rn"`
+	DescID string `json:"id" param:"id"`
+	DescRN int64  `json:"rn" query:"rn"`
 }

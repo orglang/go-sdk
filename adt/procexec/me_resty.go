@@ -3,6 +3,7 @@ package procexec
 import (
 	"github.com/go-resty/resty/v2"
 
+	"github.com/orglang/go-sdk/adt/implsem"
 	"github.com/orglang/go-sdk/adt/procstep"
 )
 
@@ -12,11 +13,11 @@ type RestySDK struct {
 }
 
 func (sdk *RestySDK) Take(spec procstep.StepSpec) error {
-	var res ExecRef
+	var res implsem.SemRef
 	_, err := sdk.Client.R().
 		SetResult(&res).
 		SetBody(&spec).
-		SetPathParam("id", spec.ExecRef.ID).
+		SetPathParam("id", spec.ExecRef.ImplID).
 		Post("/procs/{id}/steps")
 	if err != nil {
 		return err
@@ -24,10 +25,10 @@ func (sdk *RestySDK) Take(spec procstep.StepSpec) error {
 	return nil
 }
 
-func (sdk *RestySDK) Retrieve(execRef ExecRef) (ExecSnap, error) {
+func (sdk *RestySDK) Retrieve(execRef implsem.SemRef) (ExecSnap, error) {
 	var res ExecSnap
 	_, err := sdk.Client.R().
-		SetPathParam("id", execRef.ID).
+		SetPathParam("id", execRef.ImplID).
 		SetResult(&res).
 		Get("/procs/{id}")
 	if err != nil {

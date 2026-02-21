@@ -1,6 +1,6 @@
-package descexec
+package descsem
 
-type ExecRef struct {
+type SemRef struct {
 	DescID string `json:"desc_id"`
 	DescRN int64  `json:"desc_rn"`
 }

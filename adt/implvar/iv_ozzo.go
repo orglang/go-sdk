@@ -1,4 +1,4 @@
-package poolbind
+package implvar
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
@@ -11,9 +11,9 @@ var Optional = []validation.Rule{
 	validation.Each(validation.Required),
 }
 
-func (dto BindSpec) Validate() error {
+func (dto VarSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.ChnlPH, uniqsym.Optional...),
-		validation.Field(&dto.XactQN, uniqsym.Required...),
+		validation.Field(&dto.TypeQN, uniqsym.Required...),
 	)
 }

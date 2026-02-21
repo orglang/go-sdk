@@ -3,7 +3,7 @@ package procexp
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 
-	"github.com/orglang/go-sdk/adt/procbind"
+	"github.com/orglang/go-sdk/adt/implvar"
 	"github.com/orglang/go-sdk/adt/symbol"
 	"github.com/orglang/go-sdk/adt/uniqsym"
 )
@@ -89,7 +89,7 @@ func (dto CallSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.BindPH, symbol.Required...),
 		validation.Field(&dto.ProcQN, uniqsym.Required...),
-		validation.Field(&dto.ValPHs, procbind.Optional...),
+		validation.Field(&dto.ValPHs, implvar.Optional...),
 	)
 }
 

@@ -1,4 +1,4 @@
-package descexec
+package implsem
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
@@ -7,9 +7,9 @@ import (
 	"github.com/orglang/go-sdk/adt/revnum"
 )
 
-func (dto ExecRef) Validate() error {
+func (dto SemRef) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.DescID, identity.Required...),
-		validation.Field(&dto.DescRN, revnum.Required...),
+		validation.Field(&dto.ImplID, identity.Required...),
+		validation.Field(&dto.ImplRN, revnum.Required...),
 	)
 }

@@ -1,4 +1,4 @@
-package uniqref
+package descsem
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
@@ -7,9 +7,9 @@ import (
 	"github.com/orglang/go-sdk/adt/revnum"
 )
 
-func (dto Msg) Validate() error {
+func (dto SemRef) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.DescID, identity.Required...),
-		validation.Field(&dto.DescRN, revnum.Optional...),
+		validation.Field(&dto.DescRN, revnum.Required...),
 	)
 }

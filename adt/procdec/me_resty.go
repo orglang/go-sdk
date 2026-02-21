@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/go-resty/resty/v2"
+
+	"github.com/orglang/go-sdk/adt/descsem"
 )
 
 // Client-side secondary adapter
@@ -11,8 +13,8 @@ type RestySDK struct {
 	Client *resty.Client
 }
 
-func (sdk *RestySDK) Incept(decQN string) (DecRef, error) {
-	return DecRef{}, nil
+func (sdk *RestySDK) Incept(decQN string) (descsem.SemRef, error) {
+	return descsem.SemRef{}, nil
 }
 
 func (sdk *RestySDK) Create(spec DecSpec) (DecSnap, error) {
@@ -45,7 +47,7 @@ func (sdk *RestySDK) RetrieveSnap(decID string) (DecSnap, error) {
 	return res, nil
 }
 
-func (sdk *RestySDK) RetreiveRefs() ([]DecRef, error) {
-	refs := []DecRef{}
+func (sdk *RestySDK) RetreiveRefs() ([]descsem.SemRef, error) {
+	refs := []descsem.SemRef{}
 	return refs, nil
 }
