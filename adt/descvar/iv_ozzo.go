@@ -7,7 +7,7 @@ import (
 	"github.com/orglang/go-sdk/adt/uniqsym"
 )
 
-var Optional = []validation.Rule{
+var Required = []validation.Rule{
 	validation.Length(1, 10),
 	validation.Each(validation.Required),
 }

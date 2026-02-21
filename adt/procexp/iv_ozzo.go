@@ -89,7 +89,7 @@ func (dto CallSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.BindPH, symbol.Required...),
 		validation.Field(&dto.ProcQN, uniqsym.Required...),
-		validation.Field(&dto.ValPHs, implvar.Optional...),
+		validation.Field(&dto.ValPHs, implvar.Required...),
 	)
 }
 

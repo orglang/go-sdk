@@ -9,8 +9,8 @@ import (
 
 func (dto DecSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.PoolQN, uniqsym.Required...),
+		validation.Field(&dto.DescQN, uniqsym.Required...),
 		validation.Field(&dto.ProviderVS, validation.Required),
-		validation.Field(&dto.ClientVSes, descvar.Optional...),
+		validation.Field(&dto.ClientVSes, descvar.Required...),
 	)
 }
