@@ -1,5 +1,12 @@
 package poolexp
 
+import (
+	"fmt"
+
+	"github.com/orglang/go-sdk/adt/descsem"
+	"github.com/orglang/go-sdk/adt/implsem"
+)
+
 type ExpSpec struct {
 	K       expKind      `json:"kind"`
 	Hire    *HireSpec    `json:"hire"`
@@ -16,57 +23,62 @@ type ExpSpec struct {
 type expKind string
 
 const (
-	Hire    = expKind("hire")
-	Fire    = expKind("fire")
-	Apply   = expKind("apply")
-	Quit    = expKind("quit")
-	Acquire = expKind("acquire")
-	Release = expKind("release")
-	Accept  = expKind("accept")
-	Detach  = expKind("detach")
-	Spawn   = expKind("spawn")
+	Hire    expKind = "hire"
+	Fire    expKind = "fire"
+	Apply   expKind = "apply"
+	Quit    expKind = "quit"
+	Acquire expKind = "acquire"
+	Release expKind = "release"
+	Accept  expKind = "accept"
+	Detach  expKind = "detach"
+	Spawn   expKind = "spawn"
 )
 
 type HireSpec struct {
-	CommPH string  `json:"comm_ph"`
-	ProcQN string  `json:"proc_qn"`
-	ContES ExpSpec `json:"cont_es"`
+	CommChnlPH string  `json:"comm_ph"`
+	ProcDescQN string  `json:"proc_qn"`
+	ContES     ExpSpec `json:"cont_es"`
 }
 
 type FireSpec struct {
-	ProcQN string
+	CommChnlPH string
 }
 
 type ApplySpec struct {
-	CommPH string  `json:"comm_ph"`
-	ProcQN string  `json:"proc_qn"`
-	ContES ExpSpec `json:"cont_es"`
+	CommChnlPH string  `json:"comm_ph"`
+	ProcDescQN string  `json:"proc_qn"`
+	ContES     ExpSpec `json:"cont_es"`
 }
 
 type QuitSpec struct {
-	ProcQN string `json:"proc_qn"`
+	ProcDescQN string `json:"proc_qn"`
 }
 
 type AcquireSpec struct {
-	CommPH string  `json:"comm_ph"`
-	ContES ExpSpec `json:"cont_es"`
+	CommChnlPH string  `json:"comm_ph"`
+	ContES     ExpSpec `json:"cont_es"`
 }
 
 type ReleaseSpec struct {
-	CommPH string `json:"comm_ph"`
+	CommChnlPH string `json:"comm_ph"`
 }
 
 type AcceptSpec struct {
-	CommPH string  `json:"comm_ph"`
-	ContES ExpSpec `json:"cont_es"`
+	CommChnlPH string  `json:"comm_ph"`
+	ContES     ExpSpec `json:"cont_es"`
 }
 
 type DetachSpec struct {
-	CommPH string `json:"comm_ph"`
+	CommChnlPH string `json:"comm_ph"`
 }
 
 type SpawnSpec struct {
-	BindPH string   `json:"bind_ph"`
-	ProcQN string   `json:"proc_qn"`
-	ValPHs []string `json:"val_phs"`
+	// ссылка на описание порождаемого процесса
+	ProcDescRef descsem.SemRef `json:"proc_dr"`
+	// ссылки на воплощения потребляемых процессов
+	ProcImplRefs []implsem.SemRef `json:"proc_irs"`
+}
+
+func ErrUnexpectedExpKind(k expKind) error {
+	return fmt.Errorf("unexpected exp kind: %v", k)
 }

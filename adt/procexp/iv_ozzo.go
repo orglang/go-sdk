@@ -29,36 +29,36 @@ func (dto ExpSpec) Validate() error {
 
 func (dto CloseSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
+		validation.Field(&dto.CommChnlPH, symbol.Required...),
 	)
 }
 
 func (dto WaitSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
+		validation.Field(&dto.CommChnlPH, symbol.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
 
 func (dto SendSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.ValPH, validation.Required),
+		validation.Field(&dto.CommChnlPH, symbol.Required...),
+		validation.Field(&dto.ValChnlPH, symbol.Required...),
 	)
 }
 
 func (dto RecvSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.BindPH, validation.Required),
+		validation.Field(&dto.CommChnlPH, symbol.Required...),
+		validation.Field(&dto.BindChnlPH, symbol.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
 
 func (dto LabSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.InfoQN, uniqsym.Required...),
+		validation.Field(&dto.CommChnlPH, symbol.Required...),
+		validation.Field(&dto.PatternQN, uniqsym.Required...),
 	)
 }
 
@@ -69,8 +69,8 @@ const (
 
 func (dto CaseSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.ContBSs,
+		validation.Field(&dto.CommChnlPH, symbol.Required...),
+		validation.Field(&dto.ContBSes,
 			validation.Required,
 			validation.Length(MinContNr, MaxContNr),
 			validation.Each(validation.Required),
@@ -80,22 +80,22 @@ func (dto CaseSpec) Validate() error {
 
 func (dto BranchSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.LabQN, uniqsym.Required...),
+		validation.Field(&dto.PatternQN, uniqsym.Required...),
 		validation.Field(&dto.ContES, validation.Required),
 	)
 }
 
 func (dto CallSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.BindPH, symbol.Required...),
-		validation.Field(&dto.ProcQN, uniqsym.Required...),
-		validation.Field(&dto.ValPHs, implvar.Required...),
+		validation.Field(&dto.BindChnlPH, symbol.Required...),
+		validation.Field(&dto.ProcDescQN, uniqsym.Required...),
+		validation.Field(&dto.ValChnlPHs, implvar.Required...),
 	)
 }
 
 func (dto FwdSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.CommPH, validation.Required),
-		validation.Field(&dto.ContPH, validation.Required),
+		validation.Field(&dto.CommChnlPH, symbol.Required...),
+		validation.Field(&dto.ContChnlPH, symbol.Required...),
 	)
 }

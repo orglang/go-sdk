@@ -18,18 +18,18 @@ func (sdk *RestySDK) Incept(decQN string) (descsem.SemRef, error) {
 }
 
 func (sdk *RestySDK) Create(spec DecSpec) (DecSnap, error) {
-	var res DecSnap
+	var snap DecSnap
 	resp, err := sdk.Client.R().
-		SetResult(&res).
+		SetResult(&snap).
 		SetBody(&spec).
-		Post("/decs")
+		Post("/procs/decs")
 	if err != nil {
 		return DecSnap{}, err
 	}
 	if resp.IsError() {
 		return DecSnap{}, fmt.Errorf("received: %v", string(resp.Body()))
 	}
-	return res, nil
+	return snap, nil
 }
 
 func (sdk *RestySDK) RetrieveSnap(decID string) (DecSnap, error) {

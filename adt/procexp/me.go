@@ -7,15 +7,15 @@ import (
 type expKind string
 
 const (
-	Close = expKind("close")
-	Wait  = expKind("wait")
-	Send  = expKind("send")
-	Recv  = expKind("recv")
-	Lab   = expKind("lab")
-	Case  = expKind("case")
-	Call  = expKind("call")
-	Link  = expKind("link")
-	Fwd   = expKind("fwd")
+	Close expKind = "close"
+	Wait  expKind = "wait"
+	Send  expKind = "send"
+	Recv  expKind = "recv"
+	Lab   expKind = "lab"
+	Case  expKind = "case"
+	Link  expKind = "link"
+	Fwd   expKind = "fwd"
+	Call  expKind = "call"
 )
 
 type ExpSpec struct {
@@ -31,50 +31,50 @@ type ExpSpec struct {
 }
 
 type CloseSpec struct {
-	CommPH string `json:"comm_ph"`
+	CommChnlPH string `json:"comm_ph"`
 }
 
 type WaitSpec struct {
-	CommPH string  `json:"comm_ph"`
-	ContES ExpSpec `json:"cont_es"`
+	CommChnlPH string  `json:"comm_ph"`
+	ContES     ExpSpec `json:"cont_es"`
 }
 
 type SendSpec struct {
-	CommPH string `json:"comm_ph"`
-	ValPH  string `json:"val_ph"`
+	CommChnlPH string `json:"comm_ph"`
+	ValChnlPH  string `json:"val_ph"`
 }
 
 type RecvSpec struct {
-	CommPH string  `json:"comm_ph"`
-	BindPH string  `json:"bind_ph"`
-	ContES ExpSpec `json:"cont_es"`
+	CommChnlPH string  `json:"comm_ph"`
+	BindChnlPH string  `json:"bind_ph"`
+	ContES     ExpSpec `json:"cont_es"`
 }
 
 type LabSpec struct {
-	CommPH string `json:"comm_ph"`
-	InfoQN string `json:"info_qn"`
+	CommChnlPH string `json:"comm_ph"`
+	PatternQN  string `json:"pattern_qn"`
 }
 
 type CaseSpec struct {
-	CommPH  string       `json:"comm_ph"`
-	ContBSs []BranchSpec `json:"cont_bss"`
+	CommChnlPH string       `json:"comm_ph"`
+	ContBSes   []BranchSpec `json:"cont_bses"`
 }
 
 type BranchSpec struct {
-	LabQN  string  `json:"lab_qn"`
-	ContES ExpSpec `json:"cont_es"`
+	PatternQN string  `json:"pattern_qn"`
+	ContES    ExpSpec `json:"cont_es"`
 }
 
 type CallSpec struct {
-	BindPH string   `json:"bind_ph"`
-	ProcQN string   `json:"proc_qn"` // раньше был SigPH
-	ValPHs []string `json:"val_phs"`
-	ContES ExpSpec  `json:"cont_es"`
+	BindChnlPH string   `json:"bind_ph"`
+	ProcDescQN string   `json:"proc_qn"`
+	ValChnlPHs []string `json:"val_phs"`
+	ContES     ExpSpec  `json:"cont_es"`
 }
 
 type FwdSpec struct {
-	CommPH string `json:"comm_ph"`
-	ContPH string `json:"cont_ph"`
+	CommChnlPH string `json:"comm_ph"`
+	ContChnlPH string `json:"cont_ph"`
 }
 
 func ErrUnexpectedExpKind(k expKind) error {

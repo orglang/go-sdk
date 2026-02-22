@@ -1,6 +1,9 @@
 package poolexec
 
 import (
+	"fmt"
+	"net/http"
+
 	"github.com/go-resty/resty/v2"
 
 	"github.com/orglang/go-sdk/adt/implsem"
@@ -13,27 +16,33 @@ type RestySDK struct {
 }
 
 func (sdk *RestySDK) Create(spec ExecSpec) (implsem.SemRef, error) {
-	var res implsem.SemRef
-	_, err := sdk.Client.R().
-		SetResult(&res).
+	var ref implsem.SemRef
+	res, err := sdk.Client.R().
+		SetResult(&ref).
 		SetBody(&spec).
 		Post("/pools/execs")
 	if err != nil {
 		return implsem.SemRef{}, err
 	}
-	return res, nil
+	if res.StatusCode() != http.StatusCreated {
+		return implsem.SemRef{}, fmt.Errorf("creation failed")
+	}
+	return ref, nil
 }
 
 func (sdk *RestySDK) Retrieve(ref implsem.SemRef) (ExecSnap, error) {
-	var res ExecSnap
-	_, err := sdk.Client.R().
-		SetResult(&res).
+	var snap ExecSnap
+	res, err := sdk.Client.R().
+		SetResult(&snap).
 		SetPathParam("id", ref.ImplID).
 		Get("/pools/{id}")
 	if err != nil {
 		return ExecSnap{}, err
 	}
-	return res, nil
+	if res.StatusCode() != http.StatusOK {
+		return ExecSnap{}, fmt.Errorf("retrieval failed")
+	}
+	return snap, nil
 }
 
 func (sdk *RestySDK) RetreiveRefs() ([]implsem.SemRef, error) {
@@ -42,27 +51,31 @@ func (sdk *RestySDK) RetreiveRefs() ([]implsem.SemRef, error) {
 }
 
 func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
-	_, err := sdk.Client.R().
+	res, err := sdk.Client.R().
 		SetBody(&spec).
-		SetPathParam("id", spec.ExecRef.ImplID).
-		Post("/pools/execs/{id}/steps")
+		Post("/pools/execs/steps")
 	if err != nil {
 		return err
+	}
+	if res.StatusCode() != http.StatusNoContent {
+		return fmt.Errorf("taking failed")
 	}
 	return nil
 }
 
 func (sdk *RestySDK) Spawn(spec poolstep.StepSpec) (implsem.SemRef, error) {
-	var res implsem.SemRef
-	_, err := sdk.Client.R().
-		SetResult(&res).
+	var ref implsem.SemRef
+	res, err := sdk.Client.R().
+		SetResult(&ref).
 		SetBody(&spec).
-		SetPathParam("id", spec.ExecRef.ImplID).
-		Post("/pools/{id}/spawns")
+		Post("/pools/execs/spawns")
 	if err != nil {
 		return implsem.SemRef{}, err
 	}
-	return res, nil
+	if res.StatusCode() != http.StatusCreated {
+		return implsem.SemRef{}, fmt.Errorf("taking failed")
+	}
+	return ref, nil
 }
 
 func (sdk *RestySDK) Poll(spec PollSpec) (implsem.SemRef, error) {

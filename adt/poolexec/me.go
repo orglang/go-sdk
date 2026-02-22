@@ -2,17 +2,17 @@ package poolexec
 
 import (
 	"github.com/orglang/go-sdk/adt/implsem"
-	"github.com/orglang/go-sdk/adt/implsubst"
+	"github.com/orglang/go-sdk/adt/implvar"
 )
 
 type ExecSpec struct {
-	DescQN     string                `json:"desc_qn"`
-	ProviderSS implsubst.SubstSpec   `json:"provider_ss"`
-	ClientSSes []implsubst.SubstSpec `json:"client_sses"`
+	DescQN     string            `json:"desc_qn"`
+	ProviderVS implvar.VarSpec   `json:"provider_vs"`
+	ClientVSes []implvar.VarSpec `json:"client_vses"`
 }
 
 type ExecSnap struct {
-	ExecRef  implsem.SemRef   `json:"ref"`
+	ImplRef  implsem.SemRef   `json:"ref"`
 	Title    string           `json:"title"`
 	SubExecs []implsem.SemRef `json:"subs"`
 }
