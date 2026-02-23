@@ -6,6 +6,6 @@ import (
 )
 
 type StepSpec struct {
-	PoolIR implsem.SemRef  `json:"ref"`
-	PoolES poolexp.ExpSpec `json:"pool_es"`
+	ImplRef implsem.SemRef  `json:"ref"`
+	PoolES  poolexp.ExpSpec `json:"pool_es"`
 }

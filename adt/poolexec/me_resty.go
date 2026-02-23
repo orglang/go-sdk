@@ -2,7 +2,6 @@ package poolexec
 
 import (
 	"fmt"
-	"net/http"
 
 	"github.com/go-resty/resty/v2"
 
@@ -16,33 +15,33 @@ type RestySDK struct {
 }
 
 func (sdk *RestySDK) Create(spec ExecSpec) (implsem.SemRef, error) {
-	var ref implsem.SemRef
+	var dto implsem.SemRef
 	res, err := sdk.Client.R().
-		SetResult(&ref).
+		SetResult(&dto).
 		SetBody(&spec).
 		Post("/pools/execs")
 	if err != nil {
 		return implsem.SemRef{}, err
 	}
-	if res.StatusCode() != http.StatusCreated {
-		return implsem.SemRef{}, fmt.Errorf("creation failed")
+	if res.IsError() {
+		return implsem.SemRef{}, fmt.Errorf("received: %v", string(res.Body()))
 	}
-	return ref, nil
+	return dto, nil
 }
 
 func (sdk *RestySDK) Retrieve(ref implsem.SemRef) (ExecSnap, error) {
-	var snap ExecSnap
+	var dto ExecSnap
 	res, err := sdk.Client.R().
-		SetResult(&snap).
+		SetResult(&dto).
 		SetPathParam("id", ref.ImplID).
 		Get("/pools/{id}")
 	if err != nil {
 		return ExecSnap{}, err
 	}
-	if res.StatusCode() != http.StatusOK {
-		return ExecSnap{}, fmt.Errorf("retrieval failed")
+	if res.IsError() {
+		return ExecSnap{}, fmt.Errorf("received: %v", string(res.Body()))
 	}
-	return snap, nil
+	return dto, nil
 }
 
 func (sdk *RestySDK) RetreiveRefs() ([]implsem.SemRef, error) {
@@ -57,25 +56,25 @@ func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
 	if err != nil {
 		return err
 	}
-	if res.StatusCode() != http.StatusNoContent {
-		return fmt.Errorf("taking failed")
+	if res.IsError() {
+		return fmt.Errorf("received: %v", string(res.Body()))
 	}
 	return nil
 }
 
 func (sdk *RestySDK) Spawn(spec poolstep.StepSpec) (implsem.SemRef, error) {
-	var ref implsem.SemRef
+	var dto implsem.SemRef
 	res, err := sdk.Client.R().
-		SetResult(&ref).
+		SetResult(&dto).
 		SetBody(&spec).
 		Post("/pools/execs/spawns")
 	if err != nil {
 		return implsem.SemRef{}, err
 	}
-	if res.StatusCode() != http.StatusCreated {
-		return implsem.SemRef{}, fmt.Errorf("taking failed")
+	if res.IsError() {
+		return implsem.SemRef{}, fmt.Errorf("received: %v", string(res.Body()))
 	}
-	return ref, nil
+	return dto, nil
 }
 
 func (sdk *RestySDK) Poll(spec PollSpec) (implsem.SemRef, error) {

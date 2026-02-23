@@ -6,7 +6,7 @@ import (
 
 func (dto StepSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.PoolIR, validation.Required),
+		validation.Field(&dto.ImplRef, validation.Required),
 		validation.Field(&dto.PoolES, validation.Required),
 	)
 }

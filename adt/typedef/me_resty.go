@@ -17,18 +17,18 @@ func (sdk *RestySDK) Incept(typeQN string) (descsem.SemRef, error) {
 }
 
 func (sdk *RestySDK) Create(spec DefSpec) (DefSnap, error) {
-	var res DefSnap
-	resp, err := sdk.Client.R().
-		SetResult(&res).
+	var dto DefSnap
+	res, err := sdk.Client.R().
+		SetResult(&dto).
 		SetBody(&spec).
 		Post("/types")
 	if err != nil {
 		return DefSnap{}, err
 	}
-	if resp.IsError() {
-		return DefSnap{}, fmt.Errorf("received: %v", string(resp.Body()))
+	if res.IsError() {
+		return DefSnap{}, fmt.Errorf("received: %v", string(res.Body()))
 	}
-	return res, nil
+	return dto, nil
 }
 
 func (sdk *RestySDK) Modify(snap DefSnap) (DefSnap, error) {

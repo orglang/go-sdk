@@ -12,13 +12,13 @@ type RestySDK struct {
 }
 
 func (sdk *RestySDK) Create(spec DecSpec) (descsem.SemRef, error) {
-	var res descsem.SemRef
+	var dto descsem.SemRef
 	_, err := sdk.Client.R().
-		SetResult(&res).
+		SetResult(&dto).
 		SetBody(&spec).
 		Post("/pools/decs")
 	if err != nil {
 		return descsem.SemRef{}, err
 	}
-	return res, nil
+	return dto, nil
 }

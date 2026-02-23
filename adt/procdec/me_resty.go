@@ -18,36 +18,36 @@ func (sdk *RestySDK) Incept(decQN string) (descsem.SemRef, error) {
 }
 
 func (sdk *RestySDK) Create(spec DecSpec) (DecSnap, error) {
-	var snap DecSnap
-	resp, err := sdk.Client.R().
-		SetResult(&snap).
+	var dto DecSnap
+	res, err := sdk.Client.R().
+		SetResult(&dto).
 		SetBody(&spec).
 		Post("/procs/decs")
 	if err != nil {
 		return DecSnap{}, err
 	}
-	if resp.IsError() {
-		return DecSnap{}, fmt.Errorf("received: %v", string(resp.Body()))
+	if res.IsError() {
+		return DecSnap{}, fmt.Errorf("received: %v", string(res.Body()))
 	}
-	return snap, nil
+	return dto, nil
 }
 
 func (sdk *RestySDK) RetrieveSnap(decID string) (DecSnap, error) {
-	var res DecSnap
-	resp, err := sdk.Client.R().
-		SetResult(&res).
+	var dto DecSnap
+	res, err := sdk.Client.R().
+		SetResult(&dto).
 		SetPathParam("id", decID).
 		Get("/decs/{id}")
 	if err != nil {
 		return DecSnap{}, err
 	}
-	if resp.IsError() {
-		return DecSnap{}, fmt.Errorf("received: %v", string(resp.Body()))
+	if res.IsError() {
+		return DecSnap{}, fmt.Errorf("received: %v", string(res.Body()))
 	}
-	return res, nil
+	return dto, nil
 }
 
 func (sdk *RestySDK) RetreiveRefs() ([]descsem.SemRef, error) {
-	refs := []descsem.SemRef{}
-	return refs, nil
+	dtos := []descsem.SemRef{}
+	return dtos, nil
 }
