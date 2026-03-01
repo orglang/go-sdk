@@ -51,6 +51,7 @@ type ApplySpec struct {
 }
 
 type QuitSpec struct {
+	CommChnlPH string `json:"comm_ph"`
 	ProcDescQN string `json:"proc_qn"`
 }
 

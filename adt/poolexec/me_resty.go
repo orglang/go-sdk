@@ -6,7 +6,7 @@ import (
 	"github.com/go-resty/resty/v2"
 
 	"github.com/orglang/go-sdk/adt/implsem"
-	"github.com/orglang/go-sdk/adt/poolstep"
+	"github.com/orglang/go-sdk/adt/poolcomm"
 )
 
 // Client-side secondary adapter
@@ -49,7 +49,7 @@ func (sdk *RestySDK) RetreiveRefs() ([]implsem.SemRef, error) {
 	return refs, nil
 }
 
-func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
+func (sdk *RestySDK) Take(spec poolcomm.CommSpec) error {
 	res, err := sdk.Client.R().
 		SetBody(&spec).
 		Post("/pools/execs/steps")
@@ -62,7 +62,7 @@ func (sdk *RestySDK) Take(spec poolstep.StepSpec) error {
 	return nil
 }
 
-func (sdk *RestySDK) Spawn(spec poolstep.StepSpec) (implsem.SemRef, error) {
+func (sdk *RestySDK) Spawn(spec poolcomm.CommSpec) (implsem.SemRef, error) {
 	var dto implsem.SemRef
 	res, err := sdk.Client.R().
 		SetResult(&dto).
