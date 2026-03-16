@@ -76,7 +76,3 @@ func (sdk *RestySDK) Spawn(spec poolstep.StepSpec) (implsem.SemRef, error) {
 	}
 	return dto, nil
 }
-
-func (sdk *RestySDK) Poll(spec PollSpec) (implsem.SemRef, error) {
-	return implsem.SemRef{}, nil
-}

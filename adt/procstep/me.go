@@ -6,25 +6,25 @@ import (
 )
 
 type StepSpec struct {
-	ExecRef implsem.SemRef
-	ProcES  procexp.ExpSpec `json:"proc_es"`
+	ImplRef implsem.SemRef  `json:"impl_ref"`
+	ProcExp procexp.ExpSpec `json:"proc_exp"`
 }
 
 type stepKind string
 
 const (
-	MsgStep = stepKind("msg")
-	SvcStep = stepKind("svc")
+	Pub stepKind = "pub"
+	Sub stepKind = "sub"
 )
 
 type StepRec struct {
-	ExecRef implsem.SemRef `json:"exec_ref"`
-	Msg     *MsgRec        `json:"msg"`
-	Svc     *SvcRec        `json:"svc"`
+	ImplRef implsem.SemRef `json:"impl_ref"`
+	Pub     *PubRec        `json:"pub"`
+	Sub     *SubRec        `json:"sub"`
 }
 
-type MsgRec struct {
+type PubRec struct {
 }
 
-type SvcRec struct {
+type SubRec struct {
 }

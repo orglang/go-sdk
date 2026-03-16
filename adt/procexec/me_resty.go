@@ -19,7 +19,7 @@ func (sdk *RestySDK) Take(spec procstep.StepSpec) error {
 	res, err := sdk.Client.R().
 		SetResult(&dto).
 		SetBody(&spec).
-		SetPathParam("id", spec.ExecRef.ImplID).
+		SetPathParam("id", spec.ImplRef.ImplID).
 		Post("/procs/{id}/steps")
 	if err != nil {
 		return err

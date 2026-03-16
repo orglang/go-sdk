@@ -5,5 +5,5 @@ import (
 )
 
 type ExecSnap struct {
-	ExecRef implsem.SemRef
+	ImplRef implsem.SemRef
 }

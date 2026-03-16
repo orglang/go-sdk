@@ -10,7 +10,7 @@ import (
 func (dto ExecSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.DescQN, uniqsym.Required...),
-		validation.Field(&dto.ProviderVS, validation.Required),
-		validation.Field(&dto.ClientVSes, implvar.Required...),
+		validation.Field(&dto.LiabVar, validation.Required),
+		validation.Field(&dto.AssetVars, implvar.Required...),
 	)
 }

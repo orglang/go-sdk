@@ -6,17 +6,11 @@ import (
 )
 
 type ExecSpec struct {
-	DescQN     string            `json:"desc_qn"`
-	ProviderVS implvar.VarSpec   `json:"provider_vs"`
-	ClientVSes []implvar.VarSpec `json:"client_vses"`
+	DescQN    string            `json:"desc_qn"`
+	LiabVar   implvar.VarSpec   `json:"liab_var"`
+	AssetVars []implvar.VarSpec `json:"asset_vars"`
 }
 
 type ExecSnap struct {
-	ImplRef  implsem.SemRef   `json:"ref"`
-	Title    string           `json:"title"`
-	SubExecs []implsem.SemRef `json:"subs"`
-}
-
-type PollSpec struct {
-	ExecID string `json:"exec_id"`
+	ImplRef implsem.SemRef `json:"impl_ref"`
 }
