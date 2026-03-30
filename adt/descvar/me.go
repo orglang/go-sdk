@@ -1,19 +1,16 @@
 package descvar
 
+import (
+	"github.com/orglang/go-sdk/adt/descsem"
+)
+
 type VarSpec struct {
 	ChnlPH string `json:"chnl_ph"`
-	// ChnlBM bindMode `json:"chnl_bm"`
 	DescQN string `json:"desc_qn"`
 }
 
 type VarRec struct {
-	ChnlPH string `json:"chnl_ph"`
-	DescID string `json:"desc_id"`
+	DescRef descsem.SemRef `json:"desc_ref"`
+	ChnlPH  string         `json:"chnl_ph"`
+	ExpVK   int64          `json:"exp_vk"`
 }
-
-type bindMode string
-
-const (
-	Internal bindMode = "internal"
-	External bindMode = "external"
-)

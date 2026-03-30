@@ -6,13 +6,13 @@ import (
 )
 
 type DecSpec struct {
-	DescQN     string            `json:"desc_qn"`
-	ProviderVS descvar.VarSpec   `json:"provider_vs"`
-	ClientVSes []descvar.VarSpec `json:"client_vses"`
+	DescQN    string            `json:"desc_qn"`
+	LiabVar   descvar.VarSpec   `json:"liab_var"`
+	AssetVars []descvar.VarSpec `json:"asset_vars"`
 }
 
 type DecSnap struct {
-	DescRef    descsem.SemRef   `json:"ref"`
-	ProviderVR descvar.VarRec   `json:"provider_vr"`
-	ClientVRs  []descvar.VarRec `json:"client_vrs"`
+	DescRef   descsem.SemRef   `json:"desc_ref"`
+	LiabVar   descvar.VarRec   `json:"liab_var"`
+	AssetVars []descvar.VarRec `json:"asset_vars"`
 }

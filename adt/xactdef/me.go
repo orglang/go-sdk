@@ -6,11 +6,11 @@ import (
 )
 
 type DefSpec struct {
-	XactQN string          `json:"xact_qn"`
-	XactES xactexp.ExpSpec `json:"xact_es"`
+	XactQN  string          `json:"qn"`
+	XactExp xactexp.ExpSpec `json:"exp"`
 }
 
 type DefSnap struct {
-	DescRef descsem.SemRef `json:"ref"`
-	DefSpec DefSpec        `json:"spec"`
+	DescRef descsem.SemRef  `json:"ref"`
+	XactExp xactexp.ExpSpec `json:"exp"`
 }

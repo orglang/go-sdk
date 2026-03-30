@@ -9,6 +9,6 @@ import (
 func (dto DefSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.XactQN, uniqsym.Required...),
-		validation.Field(&dto.XactES, validation.Required),
+		validation.Field(&dto.XactExp, validation.Required),
 	)
 }
