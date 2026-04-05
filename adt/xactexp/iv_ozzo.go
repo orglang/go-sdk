@@ -25,8 +25,8 @@ func (dto LinkSpec) Validate() error {
 
 func (dto ResSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.ValES, validation.Required),
-		validation.Field(&dto.ContES, validation.Required),
+		validation.Field(&dto.ValExp, validation.Required),
+		validation.Field(&dto.ContExp, validation.Required),
 	)
 }
 
@@ -37,22 +37,23 @@ const (
 
 func (dto LaborSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.Choices,
+		validation.Field(&dto.ProcQNs,
 			validation.Required,
 			validation.Length(MinChoiceNr, MaxChoiceNr),
-			validation.Each(validation.Required),
+			validation.Each(uniqsym.Required...),
 		),
+		validation.Field(&dto.ContExp, validation.Required),
 	)
 }
 
 func (dto ChoiceSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.ProcQN, uniqsym.Required...),
-		validation.Field(&dto.ContES, validation.Required),
+		validation.Field(&dto.ContExp, validation.Required),
 	)
 }
 
 var kindRequired = []validation.Rule{
 	validation.Required,
-	validation.In(One, Link, Tensor, Lolli, Plus, With),
+	validation.In(One, Link, Tensor, Lolli, Plus, With, Up, Down),
 }

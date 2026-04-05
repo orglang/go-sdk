@@ -11,6 +11,8 @@ type ExpSpec struct {
 	With   *LaborSpec `json:"with,omitempty"`
 	Tensor *ResSpec   `json:"tensor,omitempty"`
 	Lolli  *ResSpec   `json:"lolli,omitempty"`
+	Up     *ShiftSpec `json:"up,omitempty"`
+	Down   *ShiftSpec `json:"down,omitempty"`
 }
 
 type LinkSpec struct {
@@ -18,18 +20,23 @@ type LinkSpec struct {
 }
 
 type LaborSpec struct {
-	Choices []ChoiceSpec `json:"choices"`
+	ProcQNs []string `json:"proc_qns"`
+	ContExp ExpSpec  `json:"cont_exp"`
 }
 
 type ChoiceSpec struct {
-	ProcQN string  `json:"proc_qn"`
-	ContES ExpSpec `json:"cont_es"`
+	ProcQN  string  `json:"proc_qn"`
+	ContExp ExpSpec `json:"cont_exp"`
 }
 
 // Resource
 type ResSpec struct {
-	ValES  ExpSpec `json:"val_es"`
-	ContES ExpSpec `json:"cont_es"`
+	ValExp  ExpSpec `json:"val_exp"`
+	ContExp ExpSpec `json:"cont_exp"`
+}
+
+type ShiftSpec struct {
+	ContExp ExpSpec `json:"cont_exp"`
 }
 
 type ExpRef struct {
@@ -46,6 +53,8 @@ const (
 	With   expKind = "with"
 	Tensor expKind = "tensor"
 	Lolli  expKind = "lolli"
+	Up     expKind = "up"
+	Down   expKind = "down"
 )
 
 func ErrKindUnexpected(got expKind) error {

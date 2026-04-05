@@ -57,7 +57,7 @@ type QuitSpec struct {
 
 type AcquireSpec struct {
 	CommChnlPH string  `json:"comm_ph"`
-	ContES     ExpSpec `json:"cont_es"`
+	ContExp    ExpSpec `json:"cont_exp"`
 }
 
 type ReleaseSpec struct {
@@ -66,7 +66,7 @@ type ReleaseSpec struct {
 
 type AcceptSpec struct {
 	CommChnlPH string  `json:"comm_ph"`
-	ContES     ExpSpec `json:"cont_es"`
+	ContExp    ExpSpec `json:"cont_exp"`
 }
 
 type DetachSpec struct {
