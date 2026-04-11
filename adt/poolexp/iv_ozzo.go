@@ -56,6 +56,7 @@ func (dto QuitSpec) Validate() error {
 func (dto AcquireSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommChnlPH, symbol.Required...),
+		validation.Field(&dto.ContExp, validation.Required),
 	)
 }
 
@@ -68,6 +69,7 @@ func (dto ReleaseSpec) Validate() error {
 func (dto AcceptSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommChnlPH, symbol.Required...),
+		validation.Field(&dto.ContExp, validation.Required),
 	)
 }
 

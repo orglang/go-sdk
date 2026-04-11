@@ -37,7 +37,7 @@ const (
 type HireSpec struct {
 	CommChnlPH string  `json:"comm_ph"`
 	ProcDescQN string  `json:"proc_qn"`
-	ContES     ExpSpec `json:"cont_es"`
+	ContExp    ExpSpec `json:"cont_exp"`
 }
 
 type FireSpec struct {
@@ -47,7 +47,7 @@ type FireSpec struct {
 type ApplySpec struct {
 	CommChnlPH string  `json:"comm_ph"`
 	ProcDescQN string  `json:"proc_qn"`
-	ContES     ExpSpec `json:"cont_es"`
+	ContExp    ExpSpec `json:"cont_exp"`
 }
 
 type QuitSpec struct {
