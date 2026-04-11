@@ -31,6 +31,7 @@ func (dto HireSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommChnlPH, symbol.Required...),
 		validation.Field(&dto.ProcDescQN, uniqsym.Required...),
+		validation.Field(&dto.ContExp, validation.Required),
 	)
 }
 
@@ -44,6 +45,7 @@ func (dto ApplySpec) Validate() error {
 	return validation.ValidateStruct(&dto,
 		validation.Field(&dto.CommChnlPH, symbol.Required...),
 		validation.Field(&dto.ProcDescQN, uniqsym.Required...),
+		validation.Field(&dto.ContExp, validation.Required),
 	)
 }
 
