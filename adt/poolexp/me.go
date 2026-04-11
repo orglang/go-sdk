@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/orglang/go-sdk/adt/descsem"
-	"github.com/orglang/go-sdk/adt/implsem"
+	"github.com/orglang/go-sdk/adt/semterm"
 )
 
 type ExpSpec struct {
@@ -77,7 +77,7 @@ type SpawnSpec struct {
 	// ссылка на описание порождаемого процесса
 	ProcDescRef descsem.SemRef `json:"proc_dr"`
 	// ссылки на воплощения потребляемых процессов
-	ProcImplRefs []implsem.SemRef `json:"proc_irs"`
+	ProcImplRefs []semterm.TermRef `json:"proc_irs"`
 }
 
 func ErrUnexpectedExpKind(k expKind) error {

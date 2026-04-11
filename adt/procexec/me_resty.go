@@ -5,8 +5,8 @@ import (
 
 	"github.com/go-resty/resty/v2"
 
-	"github.com/orglang/go-sdk/adt/implsem"
 	"github.com/orglang/go-sdk/adt/procstep"
+	"github.com/orglang/go-sdk/adt/semterm"
 )
 
 // Client-side secondary adapter
@@ -15,11 +15,11 @@ type RestySDK struct {
 }
 
 func (sdk *RestySDK) Take(spec procstep.StepSpec) error {
-	var dto implsem.SemRef
+	var dto semterm.TermRef
 	res, err := sdk.Client.R().
 		SetResult(&dto).
 		SetBody(&spec).
-		SetPathParam("id", spec.ImplRef.ImplID).
+		SetPathParam("id", spec.ImplRef.TermID).
 		Post("/procs/{id}/steps")
 	if err != nil {
 		return err
@@ -30,10 +30,10 @@ func (sdk *RestySDK) Take(spec procstep.StepSpec) error {
 	return nil
 }
 
-func (sdk *RestySDK) Retrieve(execRef implsem.SemRef) (ExecSnap, error) {
+func (sdk *RestySDK) Retrieve(execRef semterm.TermRef) (ExecSnap, error) {
 	var dto ExecSnap
 	res, err := sdk.Client.R().
-		SetPathParam("id", execRef.ImplID).
+		SetPathParam("id", execRef.TermID).
 		SetResult(&dto).
 		Get("/procs/{id}")
 	if err != nil {

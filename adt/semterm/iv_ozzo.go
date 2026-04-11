@@ -1,4 +1,4 @@
-package implsem
+package semterm
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
@@ -7,9 +7,9 @@ import (
 	"github.com/orglang/go-sdk/adt/revnum"
 )
 
-func (dto SemRef) Validate() error {
+func (dto TermRef) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.ImplID, identity.Required...),
-		validation.Field(&dto.ImplRN, revnum.Required...),
+		validation.Field(&dto.TermID, identity.Required...),
+		validation.Field(&dto.TermRN, revnum.Required...),
 	)
 }

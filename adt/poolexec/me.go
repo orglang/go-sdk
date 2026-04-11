@@ -1,8 +1,8 @@
 package poolexec
 
 import (
-	"github.com/orglang/go-sdk/adt/implsem"
 	"github.com/orglang/go-sdk/adt/implvar"
+	"github.com/orglang/go-sdk/adt/semterm"
 )
 
 type ExecSpec struct {
@@ -12,5 +12,5 @@ type ExecSpec struct {
 }
 
 type ExecSnap struct {
-	ImplRef implsem.SemRef `json:"impl_ref"`
+	ImplRef semterm.TermRef `json:"impl_ref"`
 }

@@ -1,9 +1,9 @@
 package procexec
 
 import (
-	"github.com/orglang/go-sdk/adt/implsem"
+	"github.com/orglang/go-sdk/adt/semterm"
 )
 
 type ExecSnap struct {
-	ImplRef implsem.SemRef
+	ImplRef semterm.TermRef
 }
