@@ -19,7 +19,7 @@ func (dto ExpSpec) Validate() error {
 
 func (dto LinkSpec) Validate() error {
 	return validation.ValidateStruct(&dto,
-		validation.Field(&dto.XactQN, uniqsym.Required...),
+		validation.Field(&dto.TypeQN, uniqsym.Required...),
 	)
 }
 

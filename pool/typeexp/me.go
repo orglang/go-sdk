@@ -16,7 +16,7 @@ type ExpSpec struct {
 }
 
 type LinkSpec struct {
-	XactQN string `json:"xact_qn"`
+	TypeQN string `json:"type_qn"`
 }
 
 type LaborSpec struct {
