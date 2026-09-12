@@ -8,15 +8,14 @@ import (
 )
 
 type ExpSpec struct {
-	K      expKind   `parser:"@@" json:"kind"`
-	Link   *LinkSpec `parser:"( 'link' @@" json:"link,omitempty"`
-	Tensor *ProdSpec `parser:"| 'tensor' @@" json:"tensor,omitempty"`
-	Lolli  *ProdSpec `parser:"| 'lolli' @@" json:"lolli,omitempty"`
-	Plus   *SumSpec  `parser:"| 'plus' @@" json:"plus,omitempty"`
-	With   *SumSpec  `parser:"| 'with' @@" json:"with,omitempty"`
-	// With *SumSpec   `parser:"| @@" json:"with,omitempty"`
-	Up   *ShiftSpec `parser:"| 'up' @@" json:"up,omitempty"`
-	Down *ShiftSpec `parser:"| 'down' @@ )" json:"down,omitempty"`
+	K      expKind    `parser:"@@" json:"kind"`
+	Link   *LinkSpec  `parser:"( 'link' @@" json:"link,omitempty"`
+	Tensor *ProdSpec  `parser:"| 'tensor' @@" json:"tensor,omitempty"`
+	Lolli  *ProdSpec  `parser:"| 'lolli' @@" json:"lolli,omitempty"`
+	Plus   *SumSpec   `parser:"| 'plus' @@" json:"plus,omitempty"`
+	With   *SumSpec   `parser:"| 'with' @@" json:"with,omitempty"`
+	Up     *ShiftSpec `parser:"| 'up' @@" json:"up,omitempty"`
+	Down   *ShiftSpec `parser:"| 'down' @@ )" json:"down,omitempty"`
 }
 
 type LinkSpec struct {
@@ -30,13 +29,11 @@ type ProdSpec struct {
 
 type SumSpec struct {
 	Choices []ChoiceSpec `parser:"'{' @@* '}'" json:"choices"`
-	// Choices []ChoiceSpec `parser:"('with' @@)+" json:"choices"`
 }
 
 type ChoiceSpec struct {
-	LabQN string `parser:"'@'@Ident" json:"lab_qn"`
-	// LabQN string  `parser:"'(' @Ident ')'" json:"lab_qn"`
-	Cont ExpSpec `parser:"'{' @@? '}'" json:"cont_es"`
+	LabQN string  `parser:"'@'@Ident" json:"lab_qn"`
+	Cont  ExpSpec `parser:"'{' @@? '}'" json:"cont_es"`
 }
 
 type ShiftSpec struct {

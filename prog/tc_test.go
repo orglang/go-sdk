@@ -158,7 +158,7 @@ func TestMsgFromText_Success(t *testing.T) {
 
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {
-			got, err := msgFromText(test.text)
+			got, err := MsgFromText(test.text)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -196,7 +196,7 @@ func TestMsgFromText_Failure(t *testing.T) {
 
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {
-			_, err := msgFromText(test.text)
+			_, err := MsgFromText(test.text)
 			if err == nil || !strings.Contains(err.Error(), test.msg) {
 				t.Fatalf("want: %v; got: %v", test.msg, err)
 			}

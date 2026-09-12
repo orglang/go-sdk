@@ -8,7 +8,7 @@ import (
 	proctypedef "github.com/orglang/go-sdk/proc/typedef"
 )
 
-func msgFromText(text string) (Spec, error) {
+func MsgFromText(text string) (Spec, error) {
 	parser, buildErr := participle.Build[Spec](participle.Union[prog.ProgExp](pooltypedef.DefSpec{}, proctypedef.DefSpec{}))
 	if buildErr != nil {
 		return Spec{}, buildErr
