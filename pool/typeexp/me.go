@@ -2,41 +2,44 @@ package typeexp
 
 import (
 	"fmt"
+	"slices"
+
+	"github.com/alecthomas/participle/v2/lexer"
 )
 
 type ExpSpec struct {
-	K      expKind    `json:"kind"`
-	Link   *LinkSpec  `json:"link,omitempty"`
-	Plus   *LaborSpec `json:"plus,omitempty"`
-	With   *LaborSpec `json:"with,omitempty"`
-	Tensor *ResSpec   `json:"tensor,omitempty"`
-	Lolli  *ResSpec   `json:"lolli,omitempty"`
-	Up     *ShiftSpec `json:"up,omitempty"`
-	Down   *ShiftSpec `json:"down,omitempty"`
+	K      expKind    `parser:"@@" json:"kind"`
+	Link   *LinkSpec  `parser:"( 'link' @@" json:"link,omitempty"`
+	Plus   *LaborSpec `parser:"| 'plus' @@" json:"plus,omitempty"`
+	With   *LaborSpec `parser:"| 'with' @@" json:"with,omitempty"`
+	Tensor *ResSpec   `parser:"| 'tensor' @@" json:"tensor,omitempty"`
+	Lolli  *ResSpec   `parser:"| 'lolli' @@" json:"lolli,omitempty"`
+	Up     *ShiftSpec `parser:"| 'up' @@" json:"up,omitempty"`
+	Down   *ShiftSpec `parser:"| 'down' @@ )" json:"down,omitempty"`
 }
 
 type LinkSpec struct {
-	TypeQN string `json:"type_qn"`
+	TypeQN string `parser:"@Ident" json:"type_qn"`
 }
 
 type LaborSpec struct {
-	ProcQNs []string `json:"proc_qns"`
-	ContExp ExpSpec  `json:"cont_exp"`
+	ProcQNs []string `parser:"'(' @Ident* ')'" json:"proc_qns"`
+	ContExp ExpSpec  `parser:"'{' @@? '}'" json:"cont_exp"`
 }
 
 type ChoiceSpec struct {
-	ProcQN  string  `json:"proc_qn"`
-	ContExp ExpSpec `json:"cont_exp"`
+	ProcQN  string  `parser:"" json:"proc_qn"`
+	ContExp ExpSpec `parser:"'{' @@? '}'" json:"cont_exp"`
 }
 
 // Resource
 type ResSpec struct {
-	ValExp  ExpSpec `json:"val_exp"`
-	ContExp ExpSpec `json:"cont_exp"`
+	ValExp  ExpSpec `parser:"" json:"val_exp"`
+	ContExp ExpSpec `parser:"'{' @@? '}'" json:"cont_exp"`
 }
 
 type ShiftSpec struct {
-	ContExp ExpSpec `json:"cont_exp"`
+	ContExp ExpSpec `parser:"'{' @@? '}'" json:"cont_exp"`
 }
 
 type ExpRef struct {
@@ -45,6 +48,14 @@ type ExpRef struct {
 }
 
 type expKind string
+
+func (k *expKind) Parse(lex *lexer.PeekingLexer) error {
+	kind := expKind(lex.Peek().Value)
+	if slices.Contains(Kinds, kind) {
+		*k = kind
+	}
+	return nil
+}
 
 const (
 	One    expKind = "one"
@@ -55,6 +66,10 @@ const (
 	Lolli  expKind = "lolli"
 	Up     expKind = "up"
 	Down   expKind = "down"
+)
+
+var (
+	Kinds = []expKind{One, Link, Plus, With, Tensor, Lolli, Up, Down}
 )
 
 func ErrKindUnexpected(got expKind) error {
