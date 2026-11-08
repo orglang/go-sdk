@@ -6,7 +6,6 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/orglang/go-sdk/internal/prog"
 	pooltypedef "github.com/orglang/go-sdk/pool/typedef"
 	pooltypeexp "github.com/orglang/go-sdk/pool/typeexp"
 	proctypedef "github.com/orglang/go-sdk/proc/typedef"
@@ -22,7 +21,7 @@ func TestMsgFromText_Success(t *testing.T) {
 			text: `
 				pool type t1 {}
 			`,
-			spec: Spec{Exps: []prog.ProgExp{
+			spec: Spec{Exps: []ProgExp{
 				pooltypedef.DefSpec{TypeQN: "t1"},
 			}},
 		},
@@ -31,7 +30,7 @@ func TestMsgFromText_Success(t *testing.T) {
 				pool type t1 {}
 				pool type t2 {}
 			`,
-			spec: Spec{Exps: []prog.ProgExp{
+			spec: Spec{Exps: []ProgExp{
 				pooltypedef.DefSpec{TypeQN: "t1"},
 				pooltypedef.DefSpec{TypeQN: "t2"}},
 			},
@@ -41,7 +40,7 @@ func TestMsgFromText_Success(t *testing.T) {
 				pool type t1 {}
 				proc type t2 {}
 			`,
-			spec: Spec{Exps: []prog.ProgExp{
+			spec: Spec{Exps: []ProgExp{
 				pooltypedef.DefSpec{TypeQN: "t1"},
 				proctypedef.DefSpec{TypeQN: "t2"}},
 			},
@@ -51,7 +50,7 @@ func TestMsgFromText_Success(t *testing.T) {
 				proc type t1 {}
 				pool type t2 {}
 			`,
-			spec: Spec{Exps: []prog.ProgExp{
+			spec: Spec{Exps: []ProgExp{
 				proctypedef.DefSpec{TypeQN: "t1"},
 				pooltypedef.DefSpec{TypeQN: "t2"}},
 			},
@@ -62,7 +61,7 @@ func TestMsgFromText_Success(t *testing.T) {
 					up {}
 				}
 			`,
-			spec: Spec{Exps: []prog.ProgExp{
+			spec: Spec{Exps: []ProgExp{
 				pooltypedef.DefSpec{TypeQN: "t1", TypeExp: pooltypeexp.ExpSpec{
 					K:  "up",
 					Up: &pooltypeexp.ShiftSpec{},
@@ -75,7 +74,7 @@ func TestMsgFromText_Success(t *testing.T) {
 					down {}
 				}
 			`,
-			spec: Spec{Exps: []prog.ProgExp{
+			spec: Spec{Exps: []ProgExp{
 				pooltypedef.DefSpec{TypeQN: "t1", TypeExp: pooltypeexp.ExpSpec{
 					K:    "down",
 					Down: &pooltypeexp.ShiftSpec{},
@@ -94,7 +93,7 @@ func TestMsgFromText_Success(t *testing.T) {
 					}
 				}
 			`,
-			spec: Spec{Exps: []prog.ProgExp{
+			spec: Spec{Exps: []ProgExp{
 				pooltypedef.DefSpec{TypeQN: "t1", TypeExp: pooltypeexp.ExpSpec{
 					K: "up",
 					Up: &pooltypeexp.ShiftSpec{ContExp: pooltypeexp.ExpSpec{
@@ -129,7 +128,7 @@ func TestMsgFromText_Success(t *testing.T) {
 					}
 				}
 			`,
-			spec: Spec{Exps: []prog.ProgExp{
+			spec: Spec{Exps: []ProgExp{
 				proctypedef.DefSpec{TypeQN: "t1", TypeExp: proctypeexp.ExpSpec{
 					K: "up",
 					Up: &proctypeexp.ShiftSpec{Cont: proctypeexp.ExpSpec{
