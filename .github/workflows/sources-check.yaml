@@ -1,0 +1,38 @@
+name: Sources Check
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, ready_for_review, synchronize]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sources-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: Check formatting
+        run: |
+          files="$(gofmt -s -l .)"
+          if [ -n "$files" ]; then
+            echo "$files"
+            exit 1
+          fi
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test
+        run: go test ./...
